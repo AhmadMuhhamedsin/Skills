@@ -1,2 +1,0 @@
-# Skills
-Skills App Repository
