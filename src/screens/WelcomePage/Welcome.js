@@ -20,7 +20,7 @@ export default function Welcome({navigation}) {
       <TextInput style={styles.box} placeholder="Email" />
       <TextInput style={styles.box} placeholder="Password"/>
       <TouchableOpacity style={styles.registerOpt}>
-        <Text onPress= {() => handlePress2()}>Register
+        <Text  onPress= {() => handlePress2()}>Register
         </Text>
       </TouchableOpacity>
       <View style={styles.nextBox}>
@@ -54,8 +54,9 @@ const styles = StyleSheet.create({
       borderRadius: 10
     },
     registerOpt: {
-      marginTop: 8,
-      marginLeft: 15,
+      marginTop: 16,
+      marginLeft: 70,
+      marginBottom:20,
       color: '#7C7C7C'
 
     },

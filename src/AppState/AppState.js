@@ -24,20 +24,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function AppState(){
     const [allOffers, setAllOffers] = useState([
         {
-          offerId:1, offerTitle: 'First title', offerText: 'This is my first offer, hope you enjoy it',
+          offerId:1, offerTitle: 'First title', subject: 'math',
           author: {id:1, offerAuthor: 'Mari', email: 'mari@tptlive.ee', age: 25}  
           
         },
-        { offerId: 2, offerTitle: 'Second title', offerText: 'This is my second offer, hope you enjoy it',
+        { offerId: 2, offerTitle: 'Second title', subject: 'science',
           author: {id:2, offerAuthor: 'Mark', email: 'mark@tptlive.ee', age: 30}  
         },
-        { offerId: 3, offerTitle: 'Third title', offerText: 'This is my third offer, hope you enjoy it',
+        { offerId: 3, offerTitle: 'Third title', subject: 'literature',
           author: {id:3, offerAuthor: 'Markus', email: 'markus@tptlive.ee', age: 35}  
         },
-        { offerId: 4, offerTitle: 'Fourth title', offerText: 'This is my fourth offer, hope you enjoy it',
+        { offerId: 4, offerTitle: 'Fourth title', subject: 'trigonometry',
           author: {id:4, offerAuthor: 'John', email: 'john@tptlive.ee', age: 40}  
         },
-        { offerId: 5, offerTitle: 'Fifth title', offerText: 'This is my fifth offer, hope you enjoy it', 
+        { offerId: 5, offerTitle: 'Fifth title', subject: 'english', 
           author: {id:5, offerAuthor: 'Marcc', email: 'marcc@tptlive.ee', age: 45}
            
         },

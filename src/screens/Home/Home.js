@@ -21,7 +21,7 @@ export default function Home({ navigation, AppState }) {
                     <View style={styles.welcomeCont}>
                         <Text style={{
                             fontFamily: 'Mulish_800ExtraBold',
-                            fontSize: 24
+                            fontSize: 32
                         }}>Offers</Text>
                         <Text style={{
                             marginTop: 8,
@@ -64,7 +64,7 @@ export default function Home({ navigation, AppState }) {
                             <View style={styles.item}>
                                 <Text style={{
                                     fontFamily: 'Mulish_600SemiBold,',
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     color: "#565656"
                                 }}>Sorting</Text>
                                 <Image
@@ -87,12 +87,23 @@ export default function Home({ navigation, AppState }) {
                             >
                                 <Text style={{
                                     fontFamily: 'Mulish_800ExtraBold',
+                                    fontSize: 24,
+                                    color: "#1E1D1D"
                                 }}>{e.author.offerAuthor}</Text>
                                 <Text style={{
                                     fontFamily: 'Mulish_400Regular',
-                                    marginTop: 24
+                                    marginTop: 4,
+                                    fontSize: 14,
+                                    
                                 }}
-                                numberOfLines={1}>{e.offerText}</Text>
+                                numberOfLines={1}>Subject: {e.subject}, Age: {e.author.age}</Text>
+                                <Text style={{
+                                    fontFamily: 'Mulish_400Regular',
+                                    marginTop: 4,
+                                    fontSize: 14,
+                                    
+                                }}
+                                numberOfLines={1}>Wednesdays</Text>
                             </TouchableOpacity>
                         )
                     })  
@@ -122,9 +133,9 @@ const styles = StyleSheet.create({
     },
     noteCont: {
         alignItems: 'flex-start',
-        margin: 24,
-        padding: 24,
-        borderWidth: 2,
+        marginTop: 16,
+        padding: 20,
+        
         borderRadius: 15,
         backgroundColor: '#fff',
         height: 160,
@@ -132,14 +143,15 @@ const styles = StyleSheet.create({
         
     },
     shadowProp: {  
-        shadowOffset: {width: -2, height: 4},  
+        shadowOffset: {width: -2, height: 2},  
         shadowColor: '#171717',  
-        shadowOpacity: 0.2,  
-        shadowRadius: 3,  
+        shadowOpacity: 0.05,  
+        shadowRadius: 1,  
     },  
     welcomeCont:{
-        paddingLeft:'6%',
+        paddingLeft:'3%',
         padding:20,
+        
     },
     scrollViewCont:{
         marginTop: 0,
@@ -148,8 +160,8 @@ const styles = StyleSheet.create({
     itemCont:{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft: "6%",
-        paddingRight: "6%",
+        paddingLeft: "3%",
+        paddingRight: "3%",
         gap:10,
         
         
@@ -162,9 +174,10 @@ const styles = StyleSheet.create({
         borderColor: '#DEDEDE',
         paddingLeft: 12,
         paddingRight: 16,
-        paddingTop: 8,
+        paddingTop: 11,
         paddingBottom: 8,
         width: 97,
         height: 42,
+        color: '#696767',
     }
 })

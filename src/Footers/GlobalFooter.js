@@ -17,9 +17,11 @@ export default function GlobalFooter({ navigation, AppState }) {
 const styles = StyleSheet.create({
     footerCont: {
         flex: 1,
+        marginTop:0,
         width: '100%',
         flexDirection: 'row',
         justifyContent: "space-around",
-        alignItems: "center"
+        alignItems: "center",
+        height: 10,
     },
 })
