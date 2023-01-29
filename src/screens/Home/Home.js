@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from "react-native";
 import GlobalFooter from "../../Footers/GlobalFooter";
 import GlobalHeader from "../../Headers/GlobalHeader";
-
+import OfferModal from "../Modals/OfferModal";
 export default function Home({ navigation, AppState }) {
     const { allOffers , setAllOffers } = AppState;
 
     const handlePress = (element) => {
-        setPost(element)
-        navigation.navigate('Offer')
+        
+        
     }
+    const [modalVisible, setModalVisible] = useState(false);
     return (
         <View style={styles.screen}>
             <GlobalHeader navigation={navigation}/>
@@ -82,7 +83,7 @@ export default function Home({ navigation, AppState }) {
                         return (
                             <TouchableOpacity
                                 key={i}
-                                onPress= {() => handlePress(e)}
+                                onPress= {() => {handlePress(e); setModalVisible(!modalVisible)}}
                                 style={[styles.noteCont, styles.shadowProp]}
                             >
                                 <Text style={{
@@ -104,7 +105,10 @@ export default function Home({ navigation, AppState }) {
                                     
                                 }}
                                 numberOfLines={1}>Wednesdays</Text>
+                                <OfferModal modalVisible={modalVisible}
+                            setModalVisible={setModalVisible}/>
                             </TouchableOpacity>
+                            
                         )
                     })  
                     }
