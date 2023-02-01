@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     borderColor: "gray",
-    borderWidth: "1.5",
     alignItems: "center",
   },
 });

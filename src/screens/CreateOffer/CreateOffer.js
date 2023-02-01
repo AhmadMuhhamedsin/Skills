@@ -45,7 +45,7 @@ export default function CreateOffer({ navigation, AppState }) {
               style={{ fontFamily: "Mulish_800ExtraBold", fontSize: 32 }}
               value={offerTitle}
               placeholder={"Postituse pealkiri"}
-              onChangeText={setOffertTitle}
+              onChangeText={setOfferTitle}
             ></TextInput>
             <TextInput
               style={{
