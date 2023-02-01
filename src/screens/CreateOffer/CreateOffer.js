@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, Button, Image } from "react-native";
 import GlobalHeader from "../../Headers/GlobalHeader";
 import GlobalFooter from "../../Footers/GlobalFooter";
+
 export default function CreateOffer({ navigation, AppState }) {
     const { allOffers, setAllOffers } = AppState;
     const [offerTitle, setOfferTitle] = useState('');
     const [offerText, setOfferText] = useState('');
-    
+
     return (
         <View style={styles.screen}>
             <GlobalHeader navigation={navigation}/>
@@ -26,24 +27,66 @@ export default function CreateOffer({ navigation, AppState }) {
                             fontFamily: 'Mulish_400Regular',
                         }}>Siin saad koostada oma enda postituse</Text>
                     </View>
+                    <View style={styles.itemCont}>
+                        <TouchableOpacity>
+                                <View style={styles.item}>
+                                    <Text style={{
+                                        fontFamily: 'Mulish_600SemiBold,',
+                                        fontSize: 14,
+                                        color: "#565656"
+                                    }}>Vali Subject</Text>
+                                    <Image
+                                        style={styles.logo}
+                                        source={require('../../assets/images/arrowdown.png')}
+                                        
+                                    />
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                                <View style={styles.item}>
+                                    <Text style={{
+                                        fontFamily: 'Mulish_600SemiBold,',
+                                        fontSize: 14,
+                                        color: "#565656"
+                                    }}>Type</Text>
+                                    <Image
+                                        style={styles.logo}
+                                        source={require('../../assets/images/arrowdown.png')}
+                                        
+                                    />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                     <View style={styles.createCont}>
                         <TextInput
-                            style={{fontFamily: 'Mulish_800ExtraBold', fontSize: 32}}
+                            style={{fontFamily: 'Mulish_800ExtraBold', fontSize: 26}}
                             value={offerTitle}
                             placeholder={'Postituse pealkiri'}
-                            onChangeText={setOffertTitle}
+                            onChangeText={setOfferTitle}
+                            multiline={true}
                         >
                         </TextInput>
                         <TextInput
-                            style={{fontFamily: 'Mulish_400Regular', fontSize: 24, marginTop: 16}}
+                            style={{fontFamily: 'Mulish_400Regular', fontSize: 20, marginTop: 16}}
                             value={offerText}
-                            placeholder={'Offerituse sisu'}
+                            placeholder={'Postituse sisu'}
                             onChangeText={setOfferText}
                             multiline={true}
                         >
                         </TextInput>
                     </View>
+                    <View>
+                        <TextInput>
+
+                        </TextInput>
+                        <TextInput>
+
+                        </TextInput>
+                    </View>
                 </ScrollView>
+                <View style={styles.postButtonCont}>
+                    <Button title='Post' color='#' borderRadius='4' /*onPress= {() => handlePress()}*//>
+                </View> 
             </View>
             <GlobalFooter AppState={AppState} navigation={navigation} />
         </View>
@@ -55,7 +98,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: '#D7DDEC'
+        backgroundColor: '#FAF8F1'
     },
     body: {
         flex: 8,
@@ -74,10 +117,42 @@ const styles = StyleSheet.create({
     },
     welcomeCont:{
         paddingLeft:'6%',
-        padding:20,      
+        padding:20,
     },
     createCont:{
         paddingLeft:'6%',
         padding:20,
+    },
+    postButtonCont:{
+        backgroundColor: '#CF6F5A',
+        width: 100,
+        height: 40,
+        alignSelf: 'flex-end',
+        marginBottom: 16,
+        borderRadius: 4,
+        borderWidth: 1,
+
+    },
+    item:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderWidth: 1,
+        borderRadius: 12,
+        borderColor: 'darkblue',
+        paddingLeft: 12,
+        paddingRight: 16,
+        paddingTop: 11,
+        paddingBottom: 8,
+        width: 105,
+        height: 42,
+        color: '#696767',
+    },
+    itemCont:{
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        paddingLeft: "3%",
+        paddingRight: "3%",
+        gap:10,
+        marginRight: 75
     }
 })
