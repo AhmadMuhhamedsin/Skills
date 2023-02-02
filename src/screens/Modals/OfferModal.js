@@ -10,14 +10,17 @@ import {
   PanResponder,
   Button
 } from "react-native";
-import Constants from "expo-constants";
 
 export default function OfferModal({
   AppState,
   modalVisible,
   setModalVisible,
+  selectedOffer,
+  authorAge,
+  authorBio,
+
 }) {
-    
+  const {offer} = AppState
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (evt, gestureState) => {
       const { dy } = gestureState;
@@ -37,6 +40,8 @@ export default function OfferModal({
     },
   });
 
+  const Separator = () => <View style={styles.separator} />
+
   return (
     <View style={styles.modalContainer} {...panResponder.panHandlers}>
       <Modal
@@ -49,14 +54,14 @@ export default function OfferModal({
           <View style={styles.modalContent}>
             <View style={styles.titleContainer}>
                 <Text style={{marginTop:10, color: 'black', fontSize: 20}}>Contact Requester</Text>
-                <Text style={{marginTop:8}}>Physics</Text>
+                <Text style={{marginTop:8}}>{selectedOffer.subject}</Text>
             </View>
             <View style={styles.requesterContainer}>
                 <View style={styles.requesterInfo}>
                     <Text style={{color: 'black', fontSize: 16}}>Requester Name</Text>
-                    <Text>age,bio</Text>
+                    <Text>age: {authorAge}, bio: {authorBio}</Text>
                     <View>
-                        <Text>Thursdays</Text>
+                        <Text>Available on {selectedOffer.availableWhen}</Text>
                         <Text>8.00PM</Text>
                     </View>
                 </View>
@@ -67,6 +72,7 @@ export default function OfferModal({
                      source={require('../../assets/images/profilepicture.png') }/>
                 </View>
             </View>
+            <Separator/>
             <View style={styles.prerequisitesInfo}>
                 
                     <Text>Prerequisites on the subject</Text>
@@ -119,7 +125,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     borderColor: "gray",
-    borderWidth: "1.5",
+    borderRadius: 20,
     justifyContent:"center"
   },
   titleContainer:{
@@ -143,6 +149,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer:{
     alignContent:'space-around',
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: "#737373",
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   button: {
     marginTop: 5,

@@ -1,15 +1,18 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from "react-native";
 import GlobalFooter from "../../Footers/GlobalFooter";
 import GlobalHeader from "../../Headers/GlobalHeader";
 import OfferModal from "../Modals/OfferModal";
-export default function Home({ navigation, AppState }) {
-    const { allOffers , setAllOffers } = AppState;
+export default function Home({ offer, navigation, AppState,  }) {
+    const { allOffers , setOffer, setAllOffers } = AppState;
 
-    const handlePress = (element) => {
-        
-        
-    }
+    useIsFocused()
+    const [selectedOffer, setSelectedOffer] = useState(null);
+    const updateSelectedOffer = (offer) => {
+        setSelectedOffer(offer);
+      };
+    
     const [modalVisible, setModalVisible] = useState(false);
     return (
         <View style={styles.screen}>
@@ -79,25 +82,25 @@ export default function Home({ navigation, AppState }) {
                     </View>
                     
                     
-                    { allOffers.map((e, i) => {
+                    { allOffers.map((offer, index) => {
                         return (
                             <TouchableOpacity
-                                key={i}
-                                onPress= {() => {handlePress(e); setModalVisible(!modalVisible)}}
+                                key={index}
+                                onPress= {() => { updateSelectedOffer(offer); setModalVisible(!modalVisible)}}
                                 style={[styles.noteCont, styles.shadowProp]}
                             >
                                 <Text style={{
                                     fontFamily: 'Mulish_800ExtraBold',
                                     fontSize: 24,
                                     color: "#1E1D1D"
-                                }}>{e.author.offerAuthor}</Text>
+                                }}>{offer.author.offerAuthor}</Text>
                                 <Text style={{
                                     fontFamily: 'Mulish_400Regular',
                                     marginTop: 4,
                                     fontSize: 14,
                                     
                                 }}
-                                numberOfLines={1}>Subject: {e.subject}, Age: {e.author.age}</Text>
+                                numberOfLines={1}>Subject: {offer.subject}, Age: {offer.author.age}</Text>
                                 <Text style={{
                                     fontFamily: 'Mulish_400Regular',
                                     marginTop: 4,
@@ -105,8 +108,16 @@ export default function Home({ navigation, AppState }) {
                                     
                                 }}
                                 numberOfLines={1}>Wednesdays</Text>
-                                <OfferModal modalVisible={modalVisible}
-                            setModalVisible={setModalVisible}/>
+                                {offer === selectedOffer && (
+                                    <OfferModal
+                                    AppState={AppState}
+                                    selectedOffer={offer}
+                                    authorAge={offer.author.age}
+                                    authorBio={offer.author.bio}
+                                    modalVisible={modalVisible}
+                                    setModalVisible={setModalVisible}
+                                    />
+                                )}
                             </TouchableOpacity>
                             
                         )

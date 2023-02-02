@@ -23,9 +23,6 @@ export default function AppNavigation({AppState}) {
         <Stack.Screen name="Home" options={{headerShown: false}}>
           {(props) => <Home {...props} AppState={AppState} />}
         </Stack.Screen>
-        <Stack.Screen name="Offer" options={{headerShown: false}}>
-          {(props) => <Offer {...props} AppState={AppState} />}
-        </Stack.Screen>
         <Stack.Screen name="CreateOffer" options={{headerShown: false}}>
           {(props) => <CreateOffer {...props} AppState={AppState} />}
         </Stack.Screen>

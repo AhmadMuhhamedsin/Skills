@@ -5,7 +5,7 @@ import GlobalHeader from "../../Headers/GlobalHeader";
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function Offer({ navigation, AppState }) {
-    const { post, setPost } = AppState;    
+    const { offer } = AppState;    
     return (
         <View style={styles.screen}>
             <GlobalHeader navigation={navigation}/>
@@ -40,14 +40,14 @@ export default function Offer({ navigation, AppState }) {
                             fontFamily: 'Mulish_800ExtraBold',
                             textAlign: 'center',
                         }}>
-                            {post.postTitle}
+                            {offer.offerTitle}
                         </Text>
                         <Text style={{
                             fontFamily: 'Mulish_400Regular',
                             textAlign: 'center',
                             marginTop: 32
                         }}>
-                            {post.postText}
+                            {offer.offerText}
                         </Text>
                     </View>
                     <View style={styles.commentAndIconCont}>
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
         paddingRight:'5%',
     },
     scrollViewCont:{
+        
         marginTop: 24,
         marginBottom: 32
     },
