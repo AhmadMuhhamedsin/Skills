@@ -1,21 +1,12 @@
-import React from "react";
-import {
-  Button,
-  TextInput,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Platform,
-  Pressable,
-} from "react-native";
+import React from 'react';
+import { Button, TextInput, StyleSheet, Text, View, TouchableOpacity, Platform, Pressable } from 'react-native';
 
 export default function Welcome({ navigation }) {
   const handlePress = () => {
-    navigation.navigate("Home");
+    navigation.navigate('Home');
   };
   const handlePress2 = () => {
-    navigation.navigate("Register");
+    navigation.navigate('Register');
   };
   return (
     <View style={styles.container}>
@@ -38,11 +29,11 @@ export default function Welcome({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FAF8F1",
+    backgroundColor: '#FAF8F1',
   },
   title: {
     fontSize: 48,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginLeft: 24,
     marginTop: 58,
   },
@@ -53,7 +44,7 @@ const styles = StyleSheet.create({
   box: {
     width: 250,
     height: 40,
-    backgroundColor: "#F4F3EC",
+    backgroundColor: '#F4F3EC',
     marginLeft: 70,
     marginTop: 16,
     borderRadius: 10,
@@ -62,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginLeft: 70,
     marginBottom: 20,
-    color: "#7C7C7C",
+    color: '#7C7C7C',
   },
   nextBox: {
     width: 200,
@@ -71,12 +62,12 @@ const styles = StyleSheet.create({
     marginTop: 16,
     borderRadius: 4,
     borderWidth: 1,
-    backgroundColor: "#CF6F5A",
+    backgroundColor: '#CF6F5A',
   },
   buttonText: {
-    color: "#fff",
-    textAlign: "center",
-    justifyContent: "center",
+    color: '#fff',
+    textAlign: 'center',
+    justifyContent: 'center',
     borderRadius: 4,
     padding: 8,
   },
@@ -87,6 +78,6 @@ const styles = StyleSheet.create({
     marginTop: 16,
     borderRadius: 4,
     borderWidth: 1,
-    backgroundColor: "#CF6F5A",
+    backgroundColor: '#CF6F5A',
   },
 });

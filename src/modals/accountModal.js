@@ -1,21 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Modal,
-  Dimensions,
-  PanResponder,
-  Button,
-} from "react-native";
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, Dimensions, PanResponder, Button } from 'react-native';
 
-export default function AccountModal({
-  AppState,
-  modalVisible,
-  setModalVisible,
-}) {
+export default function AccountModal({ AppState, modalVisible, setModalVisible }) {
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (evt, gestureState) => {
       const { dy } = gestureState;
@@ -48,34 +34,22 @@ export default function AccountModal({
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.titleContainer}>
-              <Text style={{ marginTop: 10, color: "black", fontSize: 20 }}>
-                My profile
-              </Text>
+              <Text style={{ marginTop: 10, color: 'black', fontSize: 20 }}>My profile</Text>
             </View>
             <View style={styles.detailsContainer}>
               <View style={styles.detailsInfo}>
                 <View>
-                  <Text style={{ color: "black", fontSize: 16 }}>My name</Text>
+                  <Text style={{ color: 'black', fontSize: 16 }}>My name</Text>
                   <Text>age,bio</Text>
                 </View>
                 <View style={styles.doubleButton}>
-                  <Button
-                    color="#CF6F5A"
-                    title="Edit profile"
-                    onPress={() => Alert.alert("Left button pressed")}
-                  />
-                  <Button
-                    title="Change password"
-                    color="#CF6F5A"
-                    onPress={() => Alert.alert("Right button pressed")}
-                  />
+                  <Button color="#CF6F5A" title="Edit profile" onPress={() => Alert.alert('Left button pressed')} />
+                  <Button title="Change password" color="#CF6F5A" onPress={() => Alert.alert('Right button pressed')} />
                 </View>
               </View>
 
               <View>
-                <Image
-                  source={require("../assets/images/profilepicture.png")}
-                />
+                <Image source={require('../assets/images/profilepicture.png')} />
               </View>
             </View>
             <Separator />
@@ -107,54 +81,53 @@ export default function AccountModal({
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.2)",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
   modalContent: {
-    backgroundColor: "white",
-    width: "98%",
-    height: "50%",
+    backgroundColor: 'white',
+    width: '98%',
+    height: '50%',
     padding: 20,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    borderColor: "gray",
-    justifyContent: "center",
-    flexDirection: "column",
-    justifyContent: "center",
+    borderColor: 'gray',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   titleContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     padding: 20,
   },
   detailsContainer: {
-    justifyContent: "space-between",
-    flexDirection: "row",
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
   detailsInfo: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   activeListing: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-    alignItems: "center",
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
     margin: 10,
-    alignContent: "space-around",
-    paddingLeft: 20
+    alignContent: 'space-around',
+    paddingLeft: 20,
   },
   separator: {
     marginVertical: 8,
-    borderBottomColor: "#737373",
+    borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   doubleButton: {
     flexDirection: 'row',
-    justifyContent: "center",
+    justifyContent: 'center',
     marginTop: 25,
-    padding: 8
+    padding: 8,
   },
   listingTitle: {
     fontSize: 16,
-
-  }
+  },
 });

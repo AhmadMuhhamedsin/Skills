@@ -1,26 +1,8 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Modal,
-  Dimensions,
-  PanResponder,
-  Button
-} from "react-native";
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, Dimensions, PanResponder, Button } from 'react-native';
 
-export default function OfferModal({
-  AppState,
-  modalVisible,
-  setModalVisible,
-  selectedOffer,
-  authorAge,
-  authorBio,
-
-}) {
-  const {offer} = AppState
+export default function OfferModal({ AppState, modalVisible, setModalVisible, selectedOffer, authorAge, authorBio }) {
+  const { offer } = AppState;
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (evt, gestureState) => {
       const { dy } = gestureState;
@@ -40,7 +22,7 @@ export default function OfferModal({
     },
   });
 
-  const Separator = () => <View style={styles.separator} />
+  const Separator = () => <View style={styles.separator} />;
 
   return (
     <View style={styles.modalContainer} {...panResponder.panHandlers}>
@@ -53,54 +35,52 @@ export default function OfferModal({
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.titleContainer}>
-                <Text style={{marginTop:10, color: 'black', fontSize: 20}}>Contact Requester</Text>
-                <Text style={{marginTop:8}}>{selectedOffer.subject}</Text>
+              <Text style={{ marginTop: 10, color: 'black', fontSize: 20 }}>Contact Requester</Text>
+              <Text style={{ marginTop: 8 }}>{selectedOffer.subject}</Text>
             </View>
             <View style={styles.requesterContainer}>
-                <View style={styles.requesterInfo}>
-                    <Text style={{color: 'black', fontSize: 16}}>Requester Name</Text>
-                    <Text>age: {authorAge}, bio: {authorBio}</Text>
-                    <View>
-                        <Text>Available on {selectedOffer.availableWhen}</Text>
-                        <Text>8.00PM</Text>
-                    </View>
-                </View>
-                
-                
+              <View style={styles.requesterInfo}>
+                <Text style={{ color: 'black', fontSize: 16 }}>Requester Name</Text>
+                <Text>
+                  age: {authorAge}, bio: {authorBio}
+                </Text>
                 <View>
-                    <Image 
-                     source={require('../../assets/images/profilepicture.png') }/>
+                  <Text>Available on {selectedOffer.availableWhen}</Text>
+                  <Text>8.00PM</Text>
                 </View>
+              </View>
+
+              <View>
+                <Image source={require('../../assets/images/profilepicture.png')} />
+              </View>
             </View>
-            <Separator/>
+            <Separator />
             <View style={styles.prerequisitesInfo}>
-                
-                    <Text>Prerequisites on the subject</Text>
-                
+              <Text>Prerequisites on the subject</Text>
+
+              <View>
                 <View>
-                    <View>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text></Text>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <View style={styles.button}>
-                            <Button  backgroundColor="" color='#fff'   title="Link"/>
-                        </View>
-                        
-                        <View style={styles.button}>
-                            <Button  backgroundColor="" color='#fff'   title="Link"/>
-                        </View>
-                        <View style={styles.button}>
-                            <Button  backgroundColor="" color='#fff'   title="Link"/>
-                        </View>
-                    </View>
+                  <Text></Text>
+                  <Text></Text>
+                  <Text></Text>
+                  <Text></Text>
+                  <Text></Text>
                 </View>
-                
+                <View style={styles.buttonContainer}>
+                  <View style={styles.button}>
+                    <Button backgroundColor="" color="#fff" title="Link" />
+                  </View>
+
+                  <View style={styles.button}>
+                    <Button backgroundColor="" color="#fff" title="Link" />
+                  </View>
+                  <View style={styles.button}>
+                    <Button backgroundColor="" color="#fff" title="Link" />
+                  </View>
+                </View>
+              </View>
             </View>
-            
+
             <TouchableOpacity onPress={() => setModalVisible(false)}>
               <Text>Close</Text>
             </TouchableOpacity>
@@ -113,51 +93,48 @@ export default function OfferModal({
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.2)",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
   modalContent: {
-    backgroundColor: "white",
-    width: "98%",
-    height: "50%",
+    backgroundColor: 'white',
+    width: '98%',
+    height: '50%',
     padding: 20,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    borderColor: "gray",
+    borderColor: 'gray',
     borderRadius: 20,
-    justifyContent:"center"
+    justifyContent: 'center',
   },
-  titleContainer:{
-    alignItems:'center',
+  titleContainer: {
+    alignItems: 'center',
     padding: 20,
-    
   },
   requesterContainer: {
-    
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
-  requesterInfo:{
-    justifyContent:'space-between',
-    
+  requesterInfo: {
+    justifyContent: 'space-between',
   },
-  prerequisitesInfo:{
-    justifyContent:'space-between',
+  prerequisitesInfo: {
+    justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems:'center'
+    alignItems: 'center',
   },
-  buttonContainer:{
-    alignContent:'space-around',
+  buttonContainer: {
+    alignContent: 'space-around',
   },
   separator: {
     marginVertical: 8,
-    borderBottomColor: "#737373",
+    borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   button: {
     marginTop: 5,
     backgroundColor: '#CF6F5A',
-    borderRadius: 12       
- }
+    borderRadius: 12,
+  },
 });
