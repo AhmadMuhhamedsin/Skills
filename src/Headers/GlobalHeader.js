@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import Constants from 'expo-constants';
-import AccountModal from '../modals/accountModal';
+import AccountModal from '../screens/Modals/AccountModal.js';
 
 export default function GlobalHeader() {
   const [modalVisible, setModalVisible] = useState(false);

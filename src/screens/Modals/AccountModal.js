@@ -49,7 +49,7 @@ export default function AccountModal({ AppState, modalVisible, setModalVisible }
               </View>
 
               <View>
-                <Image source={require('../assets/images/profilepicture.png')} />
+                <Image source={require('../../assets/images/profilepicture.png')} />
               </View>
             </View>
             <Separator />
