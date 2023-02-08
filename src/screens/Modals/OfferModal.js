@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, Dimensions, PanResponder, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, Dimensions, PanResponder, Button, Pressable } from 'react-native';
 
 export default function OfferModal({ AppState, modalVisible, setModalVisible, selectedOffer, authorAge, authorBio }) {
   const { offer } = AppState;
@@ -67,23 +67,25 @@ export default function OfferModal({ AppState, modalVisible, setModalVisible, se
                   <Text></Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                  <View style={styles.button}>
-                    <Button backgroundColor="" color="#fff" title="Link" />
-                  </View>
+                <View>
+        <Pressable style={styles.button} onPress={() => handlePress()}>
+          <Text style={styles.buttonText}>Link</Text>
+        </Pressable>
+      </View>
 
-                  <View style={styles.button}>
-                    <Button backgroundColor="" color="#fff" title="Link" />
-                  </View>
-                  <View style={styles.button}>
-                    <Button backgroundColor="" color="#fff" title="Link" />
-                  </View>
+      <View>
+        <Pressable style={styles.button} onPress={() => handlePress()}>
+          <Text style={styles.buttonText}>Link</Text>
+        </Pressable>
+      </View>
+      <View>
+        <Pressable style={styles.button} onPress={() => handlePress()}>
+          <Text style={styles.buttonText}>Link</Text>
+        </Pressable>
+      </View>
                 </View>
               </View>
             </View>
-
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <Text>Close</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -99,8 +101,8 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: 'white',
-    width: '98%',
-    height: '50%',
+    width: '100%',
+    height: '70%',
     padding: 20,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
@@ -131,6 +133,13 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    justifyContent: 'center',
+    borderRadius: 4,
+    padding: 8,
   },
   button: {
     marginTop: 5,
