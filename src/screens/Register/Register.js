@@ -1,20 +1,48 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput, Button, Alert } from 'react-native';
+import { Text, StyleSheet, View, TextInput, Button, Alert, TouchableOpacity, AsyncStorage } from 'react-native';
 
 const Register = ({ navigation }) => {
-  const handlePress = () => {
-    navigation.navigate('Home');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegister = async () => {
+    try {
+      await AsyncStorage.setItem("email", email);
+      await AsyncStorage.setItem("password", password);
+      navigation.navigate("Welcome");
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.formLabel}> REGISTER </Text>
-      <View>
-        <TextInput placeholder="Username" style={styles.inputStyle} />
-        <TextInput placeholder="Email" style={styles.inputStyle} />
-        <TextInput secureTextEntry={true} placeholder="Password" style={styles.inputStyle} />
-        <TextInput secureTextEntry={true} placeholder="Confirm Password" style={styles.inputStyle} />
-        <Button title="Register" color="#DB9483" onPress={() => handlePress()} />
-      </View>
+      <TextInput
+        placeholder="Email"
+        style={styles.inputStyle}
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+      />
+      <TextInput
+        placeholder="Password"
+        style={styles.inputStyle}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        secureTextEntry
+      />
+       <TextInput
+        placeholder="Confirm Password"
+        style={styles.inputStyle}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        secureTextEntry
+      />
+      <TouchableOpacity
+        style={{ backgroundColor: "lightgray", padding: 10, marginTop: 10 }}
+        onPress={handleRegister}
+      >
+        <Text>Register</Text>
+      </TouchableOpacity>
     </View>
   );
 };

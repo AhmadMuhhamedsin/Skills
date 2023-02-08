@@ -16,7 +16,7 @@ export default function CreateOffer({ navigation, AppState, selectedOffer, autho
   console.log('Chosen offer object: ', allOffers[objIndex]);
   useEffect(() => {
     handleUpdate();
-  });
+  },[]);
   const handleCreateOffer = async () => {
     const newOffer = { offerId: newOfferId, offerTitle: '', offerText: '' };
 

@@ -1,30 +1,56 @@
-import React from 'react';
-import { Button, TextInput, StyleSheet, Text, View, TouchableOpacity, Platform, Pressable } from 'react-native';
+import React, {useState} from 'react';
+import { Button, TextInput, StyleSheet, Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
 
-export default function Welcome({ navigation }) {
-  const handlePress = () => {
-    navigation.navigate('Home');
-  };
-  const handlePress2 = () => {
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handlePressRegister = () => {
     navigation.navigate('Register');
   };
+  const handleLogin = async () => {
+    try {
+      const storedEmail = await AsyncStorage.getItem("email");
+      const storedPassword = await AsyncStorage.getItem("password");
+      if (email === storedEmail && password === storedPassword) {
+        navigation.navigate("Home");
+      } else {
+        alert("Incorrect email or password");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.titleText}>Sign in or make an account below </Text>
-      <TextInput style={styles.box} placeholder="Email" />
-      <TextInput style={styles.box} placeholder="Password" />
+      <TextInput
+        placeholder="Email"
+        style={styles.box}
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+      />
+      <TextInput
+        placeholder="Password"
+        style={styles.box}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        secureTextEntry
+      />
       <TouchableOpacity style={styles.registerOpt}>
-        <Text onPress={() => handlePress2()}>Register</Text>
+        <Text onPress={() => handlePressRegister()}>Register</Text>
       </TouchableOpacity>
-      <View>
-        <Pressable style={styles.button} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Go</Text>
-        </Pressable>
-      </View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleLogin}
+      >
+        <Text>Login</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -81,3 +107,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#CF6F5A',
   },
 });
+export default Login
