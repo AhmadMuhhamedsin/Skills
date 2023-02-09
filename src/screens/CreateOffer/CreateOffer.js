@@ -8,6 +8,31 @@ export default function CreateOffer({ navigation, AppState, selectedOffer, autho
   const { offerId, setOfferId, allOffers, setAllOffers, chosenOfferId, setChosenOfferId } = AppState;
   const [offerTitle, setOfferTitle] = useState('');
   const [offerText, setOfferText] = useState('');
+  const uploadImage = async () => {
+    // Check if any file is selected or not
+    if (singleFile != null) {
+      // If file selected then create FormData
+      const fileToUpload = singleFile;
+      const data = new FormData();
+      data.append('Variables', variables);
+      data.append('File', fileToUpload);
+      // Please change file upload URL
+      const res = await fetch('http://localhost/upload.php', {
+        method: 'post',
+        body: data,
+        headers: {
+          'Content-Type': 'multipart/form-data; ',
+        },
+      });
+      const responseJson = await res.json();
+      if (responseJson.status == 1) {
+        alert('Upload Successful');
+      }
+    } else {
+      // If no file selected the show alert
+      alert('Please Select File first');
+    }
+  };
 
   const newOfferId = offerId + 1;
   let allOffersCopy = allOffers;
@@ -119,7 +144,7 @@ export default function CreateOffer({ navigation, AppState, selectedOffer, autho
             ></TextInput>
           </View>
           <View>
-            <Pressable style={styles.button} onPress={() => handlePress()}>
+            <Pressable style={styles.button} onPress={uploadImage}>
               <Text style={styles.buttonText}>Lisa file</Text>
             </Pressable>
           </View>
