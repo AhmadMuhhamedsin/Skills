@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { Button, TextInput, StyleSheet, Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
-
+import { Button, TextInput, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

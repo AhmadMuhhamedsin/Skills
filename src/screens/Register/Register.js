@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput, Button, Alert, TouchableOpacity, AsyncStorage } from 'react-native';
-
+import { Text, StyleSheet, View, TextInput, Button, Alert, TouchableOpacity} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ const Register = ({ navigation }) => {
       console.error(error);
     }
   };
-
+  console.log(email, password)
   return (
     <View style={styles.container}>
       <TextInput
