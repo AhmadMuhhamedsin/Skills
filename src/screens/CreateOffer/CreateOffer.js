@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { StyleSheet, Pressable, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import GlobalHeader from '../../Headers/GlobalHeader';
 import GlobalFooter from '../../Footers/GlobalFooter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -73,6 +73,36 @@ export default function CreateOffer({ navigation, AppState, selectedOffer, autho
               Siin saad koostada oma enda postituse
             </Text>
           </View>
+          <View style={styles.itemCont}>
+            <TouchableOpacity>
+              <View style={styles.item}>
+                <Text
+                  style={{
+                    fontFamily: 'Mulish_600SemiBold,',
+                    fontSize: 14,
+                    color: '#565656',
+                  }}
+                >
+                  Vali Subject
+                </Text>
+                <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={styles.item}>
+                <Text
+                  style={{
+                    fontFamily: 'Mulish_600SemiBold,',
+                    fontSize: 14,
+                    color: '#565656',
+                  }}
+                >
+                  Type
+                </Text>
+                <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
+              </View>
+            </TouchableOpacity>
+          </View>
           <View style={styles.createCont}>
             <TextInput
               style={{ fontFamily: 'Mulish_800ExtraBold', fontSize: 32 }}
@@ -87,6 +117,11 @@ export default function CreateOffer({ navigation, AppState, selectedOffer, autho
               onChangeText={setOfferText}
               multiline={true}
             ></TextInput>
+          </View>
+          <View>
+            <Pressable style={styles.button} onPress={() => handlePress()}>
+              <Text style={styles.buttonText}>Lisa file</Text>
+            </Pressable>
           </View>
         </ScrollView>
       </View>
@@ -105,7 +140,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#D7DDEC',
+    backgroundColor: '#FAF8F1',
   },
   body: {
     flex: 7,
@@ -154,5 +189,39 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Mulish_800ExtraBold',
     fontSize: 16,
+  },
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: 'darkblue',
+    paddingLeft: 12,
+    paddingRight: 16,
+    paddingTop: 11,
+    paddingBottom: 8,
+    width: 105,
+    height: 42,
+    color: '#696767',
+  },
+  button: {
+    marginTop: 5,
+    backgroundColor: '#CF6F5A',
+    borderRadius: 12,
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    justifyContent: 'center',
+    borderRadius: 4,
+    padding: 8,
+  },
+  itemCont: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    paddingLeft: '3%',
+    paddingRight: '3%',
+    gap: 10,
+    marginRight: 75,
   },
 });
