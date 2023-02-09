@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput, Button, Alert } from 'react-native';
+import { Text, StyleSheet, View, TextInput, Button } from 'react-native';
 
 const Register = ({ navigation }) => {
   const handlePress = () => {
