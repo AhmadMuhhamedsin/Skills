@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from '../screens/Home/Home';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CreateOffer from '../screens/CreateOffer/CreateOffer';
-import BigButton from '../screens/components/Button';
 import Welcome from '../screens/WelcomePage/Welcome';
 import Register from '../screens/Register/Register';
 

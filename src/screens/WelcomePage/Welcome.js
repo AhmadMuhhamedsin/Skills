@@ -1,14 +1,13 @@
 import React from 'react';
 import { TextInput, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import BigButton from '../components/Button';
+import MediumButton from '../components/Buttons/MediumButton';
 
 export default function Welcome({ navigation }) {
-  const navigateHome = () => {
-    navigation.navigate('Home');
-  };
+  
   const navigateRegister = () => {
     navigation.navigate('Register');
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome</Text>
@@ -18,7 +17,7 @@ export default function Welcome({ navigation }) {
       <TouchableOpacity style={styles.registerOpt}>
         <Text onPress={() => navigateRegister()}>Register</Text>
       </TouchableOpacity>
-      <BigButton onPress={() => navigateHome()}/>
+      <MediumButton text="Go"/>
     </View>
   );
 }

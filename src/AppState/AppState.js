@@ -107,7 +107,7 @@ export default function AppState() {
     chosenOfferId,
     setChosenOfferId,
   };
-  useEffect(async () => {
+  const loadOffers = async () => {
     try {
       const localOfferId = await AsyncStorage.getItem('@offerId');
       if (localOfferId !== null) {
@@ -122,6 +122,9 @@ export default function AppState() {
     } catch (e) {
       console.log(e);
     }
+  }
+  useEffect(()=> {
+    loadOffers()
   }, []);
   let [fontsLoaded] = useFonts({
     Mulish_200ExtraLight,

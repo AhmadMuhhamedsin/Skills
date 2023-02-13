@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, Dimensions, PanResponder, Button, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Modal,
+  PanResponder,
+} from 'react-native';
+import { SmallButton } from '../components/Buttons/SmallButton';
 
 export default function OfferModal({ AppState, modalVisible, setModalVisible, selectedOffer, authorAge, authorBio }) {
   const { offer } = AppState;
@@ -67,22 +75,11 @@ export default function OfferModal({ AppState, modalVisible, setModalVisible, se
                   <Text></Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                <View>
-        <Pressable style={styles.button} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Link</Text>
-        </Pressable>
-      </View>
+                  <SmallButton text="Link" />
 
-      <View>
-        <Pressable style={styles.button} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Link</Text>
-        </Pressable>
-      </View>
-      <View>
-        <Pressable style={styles.button} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Link</Text>
-        </Pressable>
-      </View>
+                  <SmallButton text="Link" />
+                  
+                  <SmallButton text="Link" />
                 </View>
               </View>
             </View>
