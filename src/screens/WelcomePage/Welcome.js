@@ -1,13 +1,17 @@
 import React from 'react';
-import { Button, TextInput, StyleSheet, Text, View, TouchableOpacity, Platform, Pressable } from 'react-native';
+import { TextInput, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import MediumButton from '../components/Buttons/MediumButton';
 
 export default function Welcome({ navigation }) {
-  const handlePress = () => {
+
+  const navigateHome = () => {
     navigation.navigate('Home');
   };
-  const handlePress2 = () => {
+  
+  const navigateRegister = () => {
     navigation.navigate('Register');
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome</Text>
@@ -15,13 +19,9 @@ export default function Welcome({ navigation }) {
       <TextInput style={styles.box} placeholder="Email" />
       <TextInput style={styles.box} placeholder="Password" />
       <TouchableOpacity style={styles.registerOpt}>
-        <Text onPress={() => handlePress2()}>Register</Text>
+        <Text onPress={() => navigateRegister()}>Register</Text>
       </TouchableOpacity>
-      <View>
-        <Pressable style={styles.button} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Go</Text>
-        </Pressable>
-      </View>
+      <MediumButton text="Go" medBfunc={navigateHome}/>
     </View>
   );
 }
@@ -54,30 +54,5 @@ const styles = StyleSheet.create({
     marginLeft: 70,
     marginBottom: 20,
     color: '#7C7C7C',
-  },
-  nextBox: {
-    width: 200,
-    height: 40,
-    marginLeft: 95,
-    marginTop: 16,
-    borderRadius: 4,
-    borderWidth: 1,
-    backgroundColor: '#CF6F5A',
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    justifyContent: 'center',
-    borderRadius: 4,
-    padding: 8,
-  },
-  button: {
-    width: 200,
-    height: 40,
-    marginLeft: 95,
-    marginTop: 16,
-    borderRadius: 4,
-    borderWidth: 1,
-    backgroundColor: '#CF6F5A',
   },
 });
