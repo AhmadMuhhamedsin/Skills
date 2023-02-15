@@ -1,115 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Pressable, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import GlobalHeader from '../../Headers/GlobalHeader';
 import GlobalFooter from '../../Footers/GlobalFooter';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function CreateOffer({ navigation, AppState, selectedOffer, authorAge, authorBio }) {
-  const { offerId, setOfferId, allOffers, setAllOffers, chosenOfferId, setChosenOfferId } = AppState;
+export default function CreateOffer({ navigation, AppState }) {
   const [offerTitle, setOfferTitle] = useState('');
   const [offerText, setOfferText] = useState('');
-  const uploadImage = async () => {
-    // Check if any file is selected or not
-    if (singleFile != null) {
-      // If file selected then create FormData
-      const fileToUpload = singleFile;
-      const data = new FormData();
-      data.append('Variables', variables);
-      data.append('File', fileToUpload);
-      // Please change file upload URL
-      const res = await fetch('http://localhost/upload.php', {
-        method: 'post',
-        body: data,
-        headers: {
-          'Content-Type': 'multipart/form-data; ',
-        },
-      });
-      const responseJson = await res.json();
-      if (responseJson.status == 1) {
-        alert('Upload Successful');
-      }
-    } else {
-      // If no file selected the show alert
-      alert('Please Select File first');
-    }
-  };
 
-  const newOfferId = offerId + 1;
-  let allOffersCopy = allOffers;
-  let objIndex = allOffers.findIndex((obj) => obj.offerId == chosenOfferId);
-  //Log object to Console.
-  console.log('Chosen offer object: ', allOffers[objIndex]);
-  useEffect(() => {
-    handleUpdate();
-  });
-  const handleCreateOffer = async () => {
-    const newOffer = { offerId: newOfferId, offerTitle: '', offerText: '' };
-
-    await AsyncStorage.setItem('@offerId', `${newOfferId}`);
-    await setChosenOfferId(newOfferId);
-    await setAllOffers((currentOffers) => [newOffer, ...currentOffers]);
-    await setOfferId(newOfferId);
-
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
-  };
-  const handleUpdate = async () => {
-    console.log('Before update: ', allOffers[objIndex]);
-    allOffersCopy[objIndex].offerTitle = offerTitle;
-    allOffersCopy[objIndex].offerText = offerText;
-    //Log object to console again.
-    console.log('After update: ', allOffersCopy[objIndex]);
-    await setAllOffers(allOffersCopy);
-
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
-  };
-  const handleOfferTextUpdate = async (text) => {
-    //Log object to Console.
-
-    await setAllOffers(allOffersCopy);
-
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
-  };
   return (
     <View style={styles.screen}>
       <GlobalHeader navigation={navigation} />
 
       <View style={styles.body}>
         <ScrollView contentContainerStyle={styles.scrollViewCont}>
-          <View style={styles.welcomeCont}>
-            <Text
-              style={{
-                fontFamily: 'Mulish_800ExtraBold',
-                fontSize: 24,
-              }}
-            >
-              Tere, saabusid Create lehele.
-            </Text>
-            <Text
-              style={{
-                marginTop: 8,
-                fontFamily: 'Mulish_400Regular',
-                fontSize: 16,
-                color: '#000',
-              }}
-            >
-              Siin saad koostada oma enda postituse
-            </Text>
-          </View>
+          <Text style={styles.welcomeCont}>Tere, saabusid Create lehele.</Text>
+          <Text
+            style={{
+              marginTop: 8,
+              fontSize: 16,
+            }}
+          >
+            Siin saad koostada oma enda postituse
+          </Text>
+
           <View style={styles.itemCont}>
             <TouchableOpacity>
               <View style={styles.item}>
-                <Text
-                  style={{
-                    fontFamily: 'Mulish_600SemiBold,',
-                    fontSize: 14,
-                    color: '#565656',
-                  }}
-                >
-                  Vali Subject
-                </Text>
+                <Text>Vali Subject</Text>
                 <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
               </View>
             </TouchableOpacity>
@@ -117,7 +34,6 @@ export default function CreateOffer({ navigation, AppState, selectedOffer, autho
               <View style={styles.item}>
                 <Text
                   style={{
-                    fontFamily: 'Mulish_600SemiBold,',
                     fontSize: 14,
                     color: '#565656',
                   }}
@@ -130,13 +46,13 @@ export default function CreateOffer({ navigation, AppState, selectedOffer, autho
           </View>
           <View style={styles.createCont}>
             <TextInput
-              style={{ fontFamily: 'Mulish_800ExtraBold', fontSize: 32 }}
+              style={{ fontSize: 32 }}
               value={offerTitle}
               placeholder={'Postituse pealkiri'}
               onChangeText={setOfferTitle}
             ></TextInput>
             <TextInput
-              style={{ fontFamily: 'Mulish_400Regular', fontSize: 24, marginTop: 16 }}
+              style={{ fontSize: 24, marginTop: 16 }}
               value={offerText}
               placeholder={'Postituse sisu'}
               onChangeText={setOfferText}
@@ -144,7 +60,7 @@ export default function CreateOffer({ navigation, AppState, selectedOffer, autho
             ></TextInput>
           </View>
           <View>
-            <Pressable style={styles.button} onPress={uploadImage}>
+            <Pressable style={styles.button}>
               <Text style={styles.buttonText}>Lisa file</Text>
             </Pressable>
           </View>
