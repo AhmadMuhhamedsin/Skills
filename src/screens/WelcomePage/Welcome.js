@@ -3,6 +3,10 @@ import { TextInput, StyleSheet, Text, View, TouchableOpacity } from 'react-nativ
 import MediumButton from '../components/Buttons/MediumButton';
 
 export default function Welcome({ navigation }) {
+
+  const navigateHome = () => {
+    navigation.navigate('Home');
+  };
   
   const navigateRegister = () => {
     navigation.navigate('Register');
@@ -17,7 +21,7 @@ export default function Welcome({ navigation }) {
       <TouchableOpacity style={styles.registerOpt}>
         <Text onPress={() => navigateRegister()}>Register</Text>
       </TouchableOpacity>
-      <MediumButton text="Go"/>
+      <MediumButton text="Go" medBfunc={navigateHome}/>
     </View>
   );
 }
