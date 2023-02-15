@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput, Button, Alert } from 'react-native';
+import { Text, StyleSheet, View, TextInput } from 'react-native';
+import MediumButton from '../components/Buttons/MediumButton';
 
-const Register = ({ navigation }) => {
-  const handlePress = () => {
-    navigation.navigate('Home');
-  };
+const Register = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.formLabel}> REGISTER </Text>
@@ -13,7 +11,7 @@ const Register = ({ navigation }) => {
         <TextInput placeholder="Email" style={styles.inputStyle} />
         <TextInput secureTextEntry={true} placeholder="Password" style={styles.inputStyle} />
         <TextInput secureTextEntry={true} placeholder="Confirm Password" style={styles.inputStyle} />
-        <Button title="Register" color="#DB9483" onPress={() => handlePress()} />
+        <MediumButton text="Register"/>
       </View>
     </View>
   );
@@ -33,7 +31,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   inputStyle: {
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
     width: 300,
     height: 40,
     paddingHorizontal: 10,

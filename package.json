@@ -22,7 +22,8 @@
     "react-native": "0.70.5",
     "react-native-component-separator": "^1.0.1",
     "react-native-dropdown-select-list": "^2.0.4",
-    "react-native-elements": "^3.4.3"
+    "react-native-elements": "^3.4.3",
+    "react-native-input-validator": "^1.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
