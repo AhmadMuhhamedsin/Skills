@@ -23,6 +23,10 @@ export default function CreateOffer({ navigation, AppState }) {
     categoryId: 1, // Edit this to be dynamic
   };
   const PublishPost = () => {
+    if (offerTitle === '' || offerText === '') {
+      alert('Please fill all fields');
+      return;
+    }
     formData.append('data', JSON.stringify(offerData));
     formData.append('File', file);
     console.log('KOGU FORMDATA MIS SENDI LÄHEB ON: ', formData);
@@ -31,6 +35,8 @@ export default function CreateOffer({ navigation, AppState }) {
       method: 'POST',
       data: formData,
     });
+    alert('Post published!');
+    navigation.navigate('Home');
   };
 
   _pickDocument = async () => {
