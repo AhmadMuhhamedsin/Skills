@@ -1,7 +1,7 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import React from 'react';
 
-export default function BigButton({AppState, text}) {
+export default function BigButton({AppState, text, bigBfunc}) {
     const {setChosenOfferId, setOfferId, offerId} = AppState
 
     const newOfferId = offerId + 1;
@@ -20,7 +20,7 @@ export default function BigButton({AppState, text}) {
   console.log("error")
   return (
     <View style={styles.saveButtonCont}>
-    <Pressable style={styles.saveButton} onPress={() => handleCreateOffer()}>
+    <Pressable style={styles.saveButton} onPress={() => {bigBfunc}}>
       <Text style={styles.saveButtonText}>{text}</Text>
     </Pressable>
     </View>
