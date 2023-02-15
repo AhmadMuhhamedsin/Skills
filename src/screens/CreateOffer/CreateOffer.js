@@ -3,35 +3,59 @@ import { StyleSheet, Pressable, Text, View, Image, TouchableOpacity, ScrollView,
 import GlobalHeader from '../../Headers/GlobalHeader';
 import GlobalFooter from '../../Footers/GlobalFooter';
 import * as DocumentPicker from 'expo-document-picker';
+import axios from 'axios';
+
+const baseUrl = ''; // Jordan pls share
 
 export default function CreateOffer({ navigation, AppState }) {
   const [offerTitle, setOfferTitle] = useState('');
   const [offerText, setOfferText] = useState('');
   const [fileName, setFileName] = useState('no file attached');
+  const [file, setFile] = useState(''); // [
+  const formData = new FormData();
+
+  let offerData = {
+    title: offerTitle,
+    description: offerText,
+    userId: 1, // Edit this to be dynamic
+    createdAt: 'today', // Edit this to be dynamic
+    type: 1, // Edit this to be dynamic
+    categoryId: 1, // Edit this to be dynamic
+  };
+  const PublishPost = () => {
+    formData.append('data', JSON.stringify(offerData));
+    formData.append('File', file);
+    console.log('KOGU FORMDATA MIS SENDI LÄHEB ON: ', formData);
+    axios({
+      url: baseUrl,
+      method: 'POST',
+      data: formData,
+    });
+  };
 
   _pickDocument = async () => {
-    const formData = new FormData();
     let result = await DocumentPicker.getDocumentAsync({});
-    if (
-      result.mimeType === 'application/vnd.ms-powerpoint' ||
-      result.mimeType === 'application/pdf' ||
-      result.mimeType === 'application/msword' ||
-      result.mimeType === 'image/png' ||
-      result.mimeType === 'image/jpeg' ||
-      result.mimeType === 'image/jpg'
-    ) {
-      if (result.size < 10000000) {
-        formData.append('File', result);
-        alert(formData);
-        setFileName(result.name);
+    if (result.type === 'success') {
+      if (
+        result.mimeType === 'application/vnd.ms-powerpoint' ||
+        result.mimeType === 'application/pdf' ||
+        result.mimeType === 'application/msword' ||
+        result.mimeType === 'image/png' ||
+        result.mimeType === 'image/jpeg' ||
+        result.mimeType === 'image/jpg'
+      ) {
+        if (result.size < 10000000) {
+          //formData.append('File', result);
+          setFile(result);
+          alert('Uploaded file: ' + result.name);
+          setFileName(result.name);
+        } else {
+          alert('File is too big');
+        }
       } else {
-        alert('File is too big');
+        alert('File type is not supported');
       }
-    } else {
-      alert('File type is not supported');
     }
-
-    console.log(result);
   };
 
   return (
@@ -57,7 +81,7 @@ export default function CreateOffer({ navigation, AppState }) {
                     color: '#565656',
                   }}
                 >
-                  Chosoe Type
+                  Choose Type
                 </Text>
                 <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
               </View>
@@ -87,8 +111,8 @@ export default function CreateOffer({ navigation, AppState }) {
         </ScrollView>
       </View>
       <View style={styles.saveButtonCont}>
-        <TouchableOpacity style={styles.saveButton} onPress={() => handleCreateOffer()}>
-          <Text style={styles.saveButtonText}>SAVE</Text>
+        <TouchableOpacity style={styles.saveButton} onPress={() => PublishPost()}>
+          <Text style={styles.saveButtonText}>PUBLISH</Text>
         </TouchableOpacity>
       </View>
       <GlobalFooter AppState={AppState} navigation={navigation} />
@@ -161,7 +185,7 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     paddingTop: 11,
     paddingBottom: 8,
-    width: 105,
+    width: 130,
     height: 42,
     color: '#696767',
   },
@@ -183,6 +207,5 @@ const styles = StyleSheet.create({
     paddingLeft: '3%',
     paddingRight: '3%',
     gap: 10,
-    marginRight: 75,
   },
 });
