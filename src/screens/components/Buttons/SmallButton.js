@@ -5,7 +5,7 @@ import { View, Pressable, Text, StyleSheet } from "react-native";
 export const SmallButton = ({text, smlBfunc}) => {
   return (
     <View>
-      <Pressable style={styles.button} OnPress={() => {smlBfunc}}>
+      <Pressable style={styles.button} OnPress={() => smlBfunc()}>
         <Text style={styles.buttonText}>{text}</Text>
       </Pressable>
     </View>

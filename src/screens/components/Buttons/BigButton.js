@@ -20,7 +20,7 @@ export default function BigButton({AppState, text, bigBfunc}) {
   console.log("error")
   return (
     <View style={styles.saveButtonCont}>
-    <Pressable style={styles.saveButton} onPress={() => {bigBfunc}}>
+    <Pressable style={styles.saveButton} onPress={() => bigBfunc()}>
       <Text style={styles.saveButtonText}>{text}</Text>
     </Pressable>
     </View>

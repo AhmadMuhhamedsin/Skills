@@ -1,5 +1,6 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 
 
@@ -7,7 +8,7 @@ export const MediumButton = ({text, medBfunc}) => {
   return (
     <View style={styles.container}>
       <Pressable style={styles.button}>
-        <Text style={styles.buttonText} onPress={() => {medBfunc}}>
+        <Text style={styles.buttonText} onPress={() => medBfunc()}>
         {text}
         </Text>
       </Pressable>
