@@ -2,10 +2,37 @@ import React, { useState } from 'react';
 import { StyleSheet, Pressable, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import GlobalHeader from '../../Headers/GlobalHeader';
 import GlobalFooter from '../../Footers/GlobalFooter';
+import * as DocumentPicker from 'expo-document-picker';
 
 export default function CreateOffer({ navigation, AppState }) {
   const [offerTitle, setOfferTitle] = useState('');
   const [offerText, setOfferText] = useState('');
+  const [fileName, setFileName] = useState('no file attached');
+
+  _pickDocument = async () => {
+    const formData = new FormData();
+    let result = await DocumentPicker.getDocumentAsync({});
+    if (
+      result.mimeType === 'application/vnd.ms-powerpoint' ||
+      result.mimeType === 'application/pdf' ||
+      result.mimeType === 'application/msword' ||
+      result.mimeType === 'image/png' ||
+      result.mimeType === 'image/jpeg' ||
+      result.mimeType === 'image/jpg'
+    ) {
+      if (result.size < 10000000) {
+        formData.append('File', result);
+        alert(formData);
+        setFileName(result.name);
+      } else {
+        alert('File is too big');
+      }
+    } else {
+      alert('File type is not supported');
+    }
+
+    console.log(result);
+  };
 
   return (
     <View style={styles.screen}>
@@ -13,20 +40,12 @@ export default function CreateOffer({ navigation, AppState }) {
 
       <View style={styles.body}>
         <ScrollView contentContainerStyle={styles.scrollViewCont}>
-          <Text style={styles.welcomeCont}>Tere, saabusid Create lehele.</Text>
-          <Text
-            style={{
-              marginTop: 8,
-              fontSize: 16,
-            }}
-          >
-            Siin saad koostada oma enda postituse
-          </Text>
+          <Text style={styles.welcomeCont}>Here you can make a new post</Text>
 
           <View style={styles.itemCont}>
             <TouchableOpacity>
               <View style={styles.item}>
-                <Text>Vali Subject</Text>
+                <Text>Choose Subject</Text>
                 <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
               </View>
             </TouchableOpacity>
@@ -38,7 +57,7 @@ export default function CreateOffer({ navigation, AppState }) {
                     color: '#565656',
                   }}
                 >
-                  Type
+                  Chosoe Type
                 </Text>
                 <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
               </View>
@@ -60,9 +79,10 @@ export default function CreateOffer({ navigation, AppState }) {
             ></TextInput>
           </View>
           <View>
-            <Pressable style={styles.button}>
-              <Text style={styles.buttonText}>Lisa file</Text>
+            <Pressable style={styles.button} onPress={this._pickDocument}>
+              <Text style={styles.buttonText}>Add file (optional)</Text>
             </Pressable>
+            <Text>Attached file: {fileName}</Text>
           </View>
         </ScrollView>
       </View>
