@@ -1,20 +1,13 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 
 
 
-export const MediumButton = ({text}) => {
-  const navigation = useNavigation();
-
-  const navigateHome = () => {
-    navigation.navigate('Home');
-  };
-
+export const MediumButton = ({text, medBfunc}) => {
   return (
     <View style={styles.container}>
       <Pressable style={styles.button}>
-        <Text style={styles.buttonText} onPress={() => navigateHome()}>
+        <Text style={styles.buttonText} onPress={() => {medBfunc}}>
         {text}
         </Text>
       </Pressable>
