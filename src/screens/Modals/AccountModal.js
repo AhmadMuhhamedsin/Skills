@@ -55,6 +55,7 @@ export default function AccountModal({ AppState, modalVisible, setModalVisible }
                   <Text style={{ color: 'black', fontSize: 16 }}>My name</Text>
                   <Text>age,bio</Text>
                 </View>
+
                 <View style={styles.doubleButton}>
                 <MediumButton text="Change password"/>
                 <MediumButton text="Edit profile"/>
@@ -72,6 +73,7 @@ export default function AccountModal({ AppState, modalVisible, setModalVisible }
 
               <View style={styles.activeListing}>
                 <Text>Offer 1</Text>
+
                 <SmallButton text="Link"/>
               </View>
               <View style={styles.activeListing}>
@@ -139,4 +141,5 @@ const styles = StyleSheet.create({
   listingTitle: {
     fontSize: 16,
   },
+
 });
