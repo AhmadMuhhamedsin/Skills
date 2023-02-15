@@ -5,7 +5,7 @@ import { View, Pressable, Text, StyleSheet } from "react-native";
 export const SmallButton = ({text}) => {
   return (
     <View>
-      <Pressable style={styles.button} onPress={() => handlePress()}>
+      <Pressable style={styles.button} >
         <Text style={styles.buttonText}>{text}</Text>
       </Pressable>
     </View>
