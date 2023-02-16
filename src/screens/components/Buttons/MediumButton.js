@@ -1,8 +1,5 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/core';
-
-
 
 export const MediumButton = ({text, medBfunc}) => {
   return (
