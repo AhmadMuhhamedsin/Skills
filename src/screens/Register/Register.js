@@ -1,7 +1,12 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TextInput } from 'react-native';
 import MediumButton from '../components/Buttons/MediumButton';
+const navigation = useNavigation;
 
+const navigateHome = () => {
+  navigation.navigate('Home');
+};
 const Register = () => {
   return (
     <View style={styles.container}>
@@ -11,7 +16,7 @@ const Register = () => {
         <TextInput placeholder="Email" style={styles.inputStyle} />
         <TextInput secureTextEntry={true} placeholder="Password" style={styles.inputStyle} />
         <TextInput secureTextEntry={true} placeholder="Confirm Password" style={styles.inputStyle} />
-        <MediumButton text="Register"/>
+        <MediumButton text="Register" medBfunc={navigateHome}/>
       </View>
     </View>
   );

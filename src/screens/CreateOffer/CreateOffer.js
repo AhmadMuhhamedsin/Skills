@@ -5,6 +5,7 @@ import GlobalFooter from '../../Footers/GlobalFooter';
 import * as DocumentPicker from 'expo-document-picker';
 import Dropdown from '../components/Dropdown';
 import axios from 'axios';
+import BigButton from '../components/Buttons/BigButton';
 
 const baseUrl = ''; // Jordan pls share
 
@@ -106,11 +107,7 @@ export default function CreateOffer({ navigation, AppState }) {
           </View>
         </ScrollView>
       </View>
-      <View style={styles.saveButtonCont}>
-        <TouchableOpacity style={styles.saveButton} onPress={() => PublishPost()}>
-          <Text style={styles.saveButtonText}>PUBLISH</Text>
-        </TouchableOpacity>
-      </View>
+      <BigButton text="PUBLISH" bigBfunc={PublishPost}/>
       <GlobalFooter AppState={AppState} navigation={navigation} />
     </View>
   );
