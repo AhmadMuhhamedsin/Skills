@@ -4,11 +4,11 @@ import React from 'react';
 export default function BigButton({ text, bigBfunc}) {
   return (
     <View style={styles.saveButtonCont}>
-    <Pressable style={styles.saveButton} onPress={() => bigBfunc()}>
-      <Text style={styles.saveButtonText}>{text}</Text>
-    </Pressable>
+      <Pressable style={styles.saveButton} onPress={() => bigBfunc()}>
+        <Text style={styles.saveButtonText}>{text}</Text>
+      </Pressable>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     color: '#fff',
-    fontFamily: 'Mulish_800ExtraBold',
     fontSize: 16,
   },
 });

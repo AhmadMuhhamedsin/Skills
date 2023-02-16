@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { StyleSheet, Pressable, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import GlobalHeader from '../../Headers/GlobalHeader';
 import GlobalFooter from '../../Footers/GlobalFooter';
 import * as DocumentPicker from 'expo-document-picker';
+import Dropdown from '../components/Dropdown';
 import axios from 'axios';
 import BigButton from '../components/Buttons/BigButton';
 
@@ -16,13 +16,18 @@ export default function CreateOffer({ navigation, AppState }) {
   const [file, setFile] = useState(''); // [
   const formData = new FormData();
 
+  const [type, setType] = useState(0);
+  const [categoryId, setCategoryId] = useState(0);
+
+  const types = ['Type', 'Offer', 'Request'];
+  const subjects = ['Subject', 'Math', 'Science', 'English'];
+
   let offerData = {
     title: offerTitle,
     description: offerText,
     userId: 1, // Edit this to be dynamic
-    createdAt: 'today', // Edit this to be dynamic
-    type: 1, // Edit this to be dynamic
-    categoryId: 1, // Edit this to be dynamic
+    type: { type }, // Edit this to be dynamic
+    categoryId: { categoryId }, // Edit this to be dynamic
   };
   const PublishPost = () => {
     if (offerTitle === '' || offerText === '') {
@@ -41,7 +46,7 @@ export default function CreateOffer({ navigation, AppState }) {
     navigation.navigate('Home');
   };
 
-  _pickDocument = async () => {
+  async function _pickDocument() {
     let result = await DocumentPicker.getDocumentAsync({});
     if (result.type === 'success') {
       if (
@@ -53,9 +58,10 @@ export default function CreateOffer({ navigation, AppState }) {
         result.mimeType === 'image/jpg'
       ) {
         if (result.size < 10000000) {
-          //formData.append('File', result);
           setFile(result);
           alert('Uploaded file: ' + result.name);
+          console.log('Category ID: ', categoryId);
+          console.log('Type: ', type);
           setFileName(result.name);
         } else {
           alert('File is too big');
@@ -64,7 +70,7 @@ export default function CreateOffer({ navigation, AppState }) {
         alert('File type is not supported');
       }
     }
-  };
+  }
 
   return (
     <View style={styles.screen}>
@@ -75,25 +81,8 @@ export default function CreateOffer({ navigation, AppState }) {
           <Text style={styles.welcomeCont}>Here you can make a new post</Text>
 
           <View style={styles.itemCont}>
-            <TouchableOpacity>
-              <View style={styles.item}>
-                <Text>Choose Subject</Text>
-                <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.item}>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: '#565656',
-                  }}
-                >
-                  Choose Type
-                </Text>
-                <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
-              </View>
-            </TouchableOpacity>
+            <Dropdown defaultText={'Subject'} listItems={subjects} onSelectAction={() => console.log('Täna')} />
+            <Dropdown defaultText={'Type'} listItems={types} onSelectAction={() => setType(index)} />
           </View>
           <View style={styles.createCont}>
             <TextInput
@@ -111,7 +100,7 @@ export default function CreateOffer({ navigation, AppState }) {
             ></TextInput>
           </View>
           <View>
-            <Pressable style={styles.button} onPress={this._pickDocument}>
+            <Pressable style={styles.button} onPress={_pickDocument}>
               <Text style={styles.buttonText}>Add file (optional)</Text>
             </Pressable>
             <Text>Attached file: {fileName}</Text>
@@ -176,7 +165,6 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     color: '#fff',
-    fontFamily: 'Mulish_800ExtraBold',
     fontSize: 16,
   },
   item: {
