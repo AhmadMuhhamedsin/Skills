@@ -1,12 +1,12 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import React from 'react';
 
-export default function BigButton({AppState, text, bigBfunc}) {
-    const {setChosenOfferId, setOfferId, offerId} = AppState
+export default function BigButton({ AppState, text, bigBfunc }) {
+  const { setChosenOfferId, setOfferId, offerId } = AppState;
 
-    const newOfferId = offerId + 1;
+  const newOfferId = offerId + 1;
 
-    const handleCreateOffer = async () => {
+  const handleCreateOffer = async () => {
     const newOffer = { offerId: newOfferId, offerTitle: '', offerText: '' };
 
     await AsyncStorage.setItem('@offerId', `${newOfferId}`);
@@ -17,14 +17,14 @@ export default function BigButton({AppState, text, bigBfunc}) {
     let localOffers = JSON.stringify(allOffers);
     await AsyncStorage.setItem('@offers', localOffers);
   };
-  console.log("error")
+  console.log('error');
   return (
     <View style={styles.saveButtonCont}>
-    <Pressable style={styles.saveButton} onPress={() => bigBfunc()}>
-      <Text style={styles.saveButtonText}>{text}</Text>
-    </Pressable>
+      <Pressable style={styles.saveButton} onPress={() => bigBfunc()}>
+        <Text style={styles.saveButtonText}>{text}</Text>
+      </Pressable>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     color: '#fff',
-    fontFamily: 'Mulish_800ExtraBold',
     fontSize: 16,
   },
 });

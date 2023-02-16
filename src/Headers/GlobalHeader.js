@@ -19,15 +19,6 @@ export default function GlobalHeader() {
         </TouchableOpacity>
       </View>
       <AccountModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
-
-      {/* <View style={styles.headerText}>
-                <Text style={styles.text}>Offers</Text>
-                <Text style={{
-                    fontFamily: 'Mulish_500Medium',
-                    fontSize: 16,
-                    color: '#7C7C7C'
-                }}>Search for tutoring on specific subjects</Text>
-            </View> */}
     </View>
   );
 }

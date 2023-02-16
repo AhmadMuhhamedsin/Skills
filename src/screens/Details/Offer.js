@@ -12,21 +12,8 @@ export default function Offer({ navigation, AppState }) {
       <View style={styles.body}>
         <ScrollView contentContainerStyle={styles.scrollViewCont} style={styles.scrollView}>
           <View style={styles.welcomeCont}>
-            <Text
-              style={{
-                fontFamily: 'Mulish_800ExtraBold',
-              }}
-            >
-              Tere, saabusid detailide lehele.
-            </Text>
-            <Text
-              style={{
-                marginTop: 8,
-                fontFamily: 'Mulish_400Regular',
-              }}
-            >
-              Siin saad vaadata tervet postitust
-            </Text>
+            <Text>Tere, saabusid detailide lehele.</Text>
+            <Text>Siin saad vaadata tervet postitust</Text>
           </View>
           <View style={styles.detailsCont}>
             <View style={styles.imageCont}>
@@ -43,7 +30,6 @@ export default function Offer({ navigation, AppState }) {
             <View style={styles.postTitleAndTextCont}>
               <Text
                 style={{
-                  fontFamily: 'Mulish_800ExtraBold',
                   textAlign: 'center',
                 }}
               >
@@ -51,7 +37,6 @@ export default function Offer({ navigation, AppState }) {
               </Text>
               <Text
                 style={{
-                  fontFamily: 'Mulish_400Regular',
                   textAlign: 'center',
                   marginTop: 32,
                 }}
@@ -64,10 +49,7 @@ export default function Offer({ navigation, AppState }) {
                 <FontAwesome name="comment" size={24} color="#FF8888" />
               </View>
               <View style="comment">
-                <TextInput
-                  style={{ fontFamily: 'Mulish_400Regular', fontSize: 24 }}
-                  placeholder={'Kommenteeri'}
-                ></TextInput>
+                <TextInput style={{ fontSize: 24 }} placeholder={'Kommenteeri'}></TextInput>
               </View>
             </View>
           </View>

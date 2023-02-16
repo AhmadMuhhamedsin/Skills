@@ -4,13 +4,12 @@ import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'rea
 import GlobalFooter from '../../Footers/GlobalFooter';
 import GlobalHeader from '../../Headers/GlobalHeader';
 import OfferModal from '../Modals/OfferModal';
-import SelectDropdown from 'react-native-select-dropdown'
+import SelectDropdown from 'react-native-select-dropdown';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import Dropdown from '../components/Dropdown';
 
 export default function Home({ offer, navigation, AppState }) {
   const { allOffers, setOffer, setAllOffers } = AppState;
-
 
   useIsFocused();
   const [selectedOffer, setSelectedOffer] = useState(null);
@@ -20,8 +19,8 @@ export default function Home({ offer, navigation, AppState }) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const subjects = ["Math", "Science", "English"]
-  const sorting = ["Newest", "Oldest", "A-Z", "Z-A"]
+  const subjects = ['Subject', 'Math', 'Science', 'English'];
+  const sorting = ['Sorting', 'Newest', 'Oldest', 'A-Z', 'Z-A'];
 
   return (
     <View style={styles.screen}>
@@ -29,18 +28,10 @@ export default function Home({ offer, navigation, AppState }) {
       <View style={styles.body}>
         <ScrollView contentContainerStyle={styles.scrollViewCont} style={styles.scrollView} nestedScrollEnabled={true}>
           <View style={styles.welcomeCont}>
-            <Text
-              style={{
-                fontFamily: 'Mulish_800ExtraBold',
-                fontSize: 32,
-              }}
-            >
-              Offers
-            </Text>
+            <Text style={{ fontSize: 32 }}>Offers</Text>
             <Text
               style={{
                 marginTop: 8,
-                fontFamily: 'Mulish_500Medium',
                 color: '#7C7C7C',
                 fontSize: 16,
               }}
@@ -48,68 +39,10 @@ export default function Home({ offer, navigation, AppState }) {
               Search for tutoring on specific subjects.
             </Text>
           </View>
-          
 
           <View style={styles.itemCont}>
-            {/* <TouchableOpacity>
-              <View style={styles.item}>
-                <Text
-                  style={{
-                    fontFamily: 'Mulish_600SemiBold,',
-                    fontSize: 14,
-                    color: '#565656',
-                  }}
-                >
-                  Subject
-                </Text>
-                <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
-              </View>
-            </TouchableOpacity> */}
-            <SelectDropdown 
-              buttonStyle={styles.item}
-              buttonTextStyle={styles.dropdown1BtnTxtStyle}
-              defaultButtonText={'Subject'}
-                 renderDropdownIcon={isOpened => {
-                  return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#444'} size={18} />;
-                }}
-	data={subjects}
-	onSelect={(selectedItem, index) => {
-		console.log(selectedItem, index)
-	}}
-	buttonTextAfterSelection={(selectedItem, index) => {
-		// text represented after item is selected
-		// if data array is an array of objects then return selectedItem.property to render after item is selected
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
-/>
-<SelectDropdown 
-              buttonStyle={styles.item}
-              buttonTextStyle={styles.dropdown1BtnTxtStyle}
-              defaultButtonText={'Sorting'}
-              dropdownBackgroundColor={'red'}
-                 renderDropdownIcon={isOpened => {
-                  return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#444'} size={18} />;
-                }}
-	data={sorting}
-	onSelect={(selectedItem, index) => {
-		console.log(selectedItem, index)
-	}}
-	buttonTextAfterSelection={(selectedItem, index) => {
-		// text represented after item is selected
-		// if data array is an array of objects then return selectedItem.property to render after item is selected
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
-/>
+            <Dropdown defaultText={'Subject'} listItems={subjects} />
+            <Dropdown defaultText={'Sorting'} listItems={sorting} />
           </View>
 
           {allOffers.map((offer, index) => {
@@ -124,7 +57,6 @@ export default function Home({ offer, navigation, AppState }) {
               >
                 <Text
                   style={{
-                    fontFamily: 'Mulish_800ExtraBold',
                     fontSize: 24,
                     color: '#1E1D1D',
                   }}
@@ -133,7 +65,6 @@ export default function Home({ offer, navigation, AppState }) {
                 </Text>
                 <Text
                   style={{
-                    fontFamily: 'Mulish_400Regular',
                     marginTop: 4,
                     fontSize: 14,
                   }}
@@ -143,7 +74,6 @@ export default function Home({ offer, navigation, AppState }) {
                 </Text>
                 <Text
                   style={{
-                    fontFamily: 'Mulish_400Regular',
                     marginTop: 4,
                     fontSize: 14,
                   }}
@@ -238,5 +168,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#444',
   },
-  dropdown1BtnTxtStyle: {color: 'red', textAlign: 'left', fontSize: 14},
+  dropdownBtnTxtStyle: { color: 'gray', fontWeight: 'bold', textAlign: 'left', fontSize: 14 },
 });
