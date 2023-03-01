@@ -14,7 +14,6 @@ export default function Dropdown({ defaultText, listItems, onSelectAction, index
       }}
       data={listItems}
       onSelect={(selectedItem, index) => {
-        console.log(selectedItem, index);
         {
           onSelectAction(index);
         }
