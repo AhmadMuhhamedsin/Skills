@@ -26,8 +26,8 @@ export default function CreateOffer({ navigation, AppState }) {
     title: offerTitle,
     description: offerText,
     userId: 1, // Edit this to be dynamic
-    type: { type }, // Edit this to be dynamic
-    categoryId: { categoryId }, // Edit this to be dynamic
+    type: { type },
+    categoryId: { categoryId },
   };
   const PublishPost = () => {
     if (offerTitle === '' || offerText === '') {
@@ -81,8 +81,8 @@ export default function CreateOffer({ navigation, AppState }) {
           <Text style={styles.welcomeCont}>Here you can make a new post</Text>
 
           <View style={styles.itemCont}>
-            <Dropdown defaultText={'Subject'} listItems={subjects} onSelectAction={() => console.log('Täna')} />
-            <Dropdown defaultText={'Type'} listItems={types} onSelectAction={() => setType(index)} />
+            <Dropdown defaultText={'Subject'} listItems={subjects} onSelectAction={(index) => setCategoryId(index)} />
+            <Dropdown defaultText={'Type'} listItems={types} onSelectAction={(index) => setType(index)} />
           </View>
           <View style={styles.createCont}>
             <TextInput
@@ -107,7 +107,7 @@ export default function CreateOffer({ navigation, AppState }) {
           </View>
         </ScrollView>
       </View>
-      <BigButton text="PUBLISH" bigBfunc={PublishPost}/>
+      <BigButton text="PUBLISH" bigBfunc={PublishPost} />
       <GlobalFooter AppState={AppState} navigation={navigation} />
     </View>
   );

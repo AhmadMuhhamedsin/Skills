@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SelectDropdown from 'react-native-select-dropdown';
 
-export default function Dropdown({ defaultText, listItems, onSelectAction }) {
+export default function Dropdown({ defaultText, listItems, onSelectAction, index }) {
   return (
     <SelectDropdown
       buttonStyle={styles.item}
@@ -16,7 +16,7 @@ export default function Dropdown({ defaultText, listItems, onSelectAction }) {
       onSelect={(selectedItem, index) => {
         console.log(selectedItem, index);
         {
-          onSelectAction;
+          onSelectAction(index);
         }
       }}
     />
