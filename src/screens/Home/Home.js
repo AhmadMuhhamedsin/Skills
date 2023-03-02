@@ -7,7 +7,7 @@ import OfferModal from '../Modals/OfferModal';
 import SelectDropdown from 'react-native-select-dropdown';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Dropdown from '../components/Dropdown';
-
+import Offer from '../components/Offer';
 export default function Home({ offer, navigation, AppState }) {
   const { allOffers, setOffer, setAllOffers } = AppState;
 
@@ -47,50 +47,8 @@ export default function Home({ offer, navigation, AppState }) {
 
           {allOffers.map((offer, index) => {
             return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  updateSelectedOffer(offer);
-                  setModalVisible(!modalVisible);
-                }}
-                style={[styles.noteCont, styles.shadowProp]}
-              >
-                <Text
-                  style={{
-                    fontSize: 24,
-                    color: '#1E1D1D',
-                  }}
-                >
-                  {offer.author.offerAuthor}
-                </Text>
-                <Text
-                  style={{
-                    marginTop: 4,
-                    fontSize: 14,
-                  }}
-                  numberOfLines={1}
-                >
-                  Subject: {offer.subject}, Age: {offer.author.age}
-                </Text>
-                <Text
-                  style={{
-                    marginTop: 4,
-                    fontSize: 14,
-                  }}
-                  numberOfLines={1}
-                >
-                  Wednesdays
-                </Text>
-                {offer === selectedOffer && (
-                  <OfferModal
-                    AppState={AppState}
-                    selectedOffer={offer}
-                    authorAge={offer.author.age}
-                    authorBio={offer.author.bio}
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                  />
-                )}
+              <TouchableOpacity>
+                <Offer offer={offer} key={index} AppState={AppState}/>
               </TouchableOpacity>
             );
           })}
