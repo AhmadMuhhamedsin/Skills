@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, Dimensions, PanResponder, Button, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Modal,
+  PanResponder,
+  Pressable,
+} from 'react-native';
 
 export default function AccountModal({ AppState, modalVisible, setModalVisible }) {
   const panResponder = PanResponder.create({
@@ -43,15 +51,15 @@ export default function AccountModal({ AppState, modalVisible, setModalVisible }
                   <Text>age,bio</Text>
                 </View>
                 <View>
-        <Pressable style={styles.doubleButton} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Edit profile</Text>
-        </Pressable>
-      </View>
-      <View>
-        <Pressable style={styles.doubleButton} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Change Password</Text>
-        </Pressable>
-      </View>
+                  <Pressable style={styles.doubleButton} onPress={() => handlePress()}>
+                    <Text style={styles.buttonText}>Edit profile</Text>
+                  </Pressable>
+                </View>
+                <View>
+                  <Pressable style={styles.doubleButton} onPress={() => handlePress()}>
+                    <Text style={styles.buttonText}>Change Password</Text>
+                  </Pressable>
+                </View>
               </View>
 
               <View>
@@ -66,28 +74,28 @@ export default function AccountModal({ AppState, modalVisible, setModalVisible }
               <View style={styles.activeListing}>
                 <Text>Offer 1</Text>
                 <View>
-        <Pressable style={styles.button} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Link</Text>
-        </Pressable>
-      </View>
+                  <Pressable style={styles.button} onPress={() => handlePress()}>
+                    <Text style={styles.buttonText}>Link</Text>
+                  </Pressable>
+                </View>
               </View>
               <View style={styles.activeListing}>
                 <Text>Offer 2</Text>
 
                 <View>
-        <Pressable style={styles.button} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Link</Text>
-        </Pressable>
-      </View>
+                  <Pressable style={styles.button} onPress={() => handlePress()}>
+                    <Text style={styles.buttonText}>Link</Text>
+                  </Pressable>
+                </View>
               </View>
               <View style={styles.activeListing}>
                 <Text>Offer 3</Text>
 
                 <View>
-        <Pressable style={styles.button} onPress={() => handlePress()}>
-          <Text style={styles.buttonText}>Link</Text>
-        </Pressable>
-      </View>
+                  <Pressable style={styles.button} onPress={() => handlePress()}>
+                    <Text style={styles.buttonText}>Link</Text>
+                  </Pressable>
+                </View>
               </View>
             </View>
           </View>
@@ -161,4 +169,4 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 8,
   },
-  });
+});

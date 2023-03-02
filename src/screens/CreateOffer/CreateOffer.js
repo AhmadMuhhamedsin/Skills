@@ -5,48 +5,7 @@ import GlobalFooter from '../../Footers/GlobalFooter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function CreateOffer({ navigation, AppState, selectedOffer, authorAge, authorBio }) {
-  const { offerId, setOfferId, allOffers, setAllOffers, chosenOfferId, setChosenOfferId } = AppState;
-  const [offerTitle, setOfferTitle] = useState('');
-  const [offerText, setOfferText] = useState('');
 
-  const newOfferId = offerId + 1;
-  let allOffersCopy = allOffers;
-  let objIndex = allOffers.findIndex((obj) => obj.offerId == chosenOfferId);
-  //Log object to Console.
-  console.log('Chosen offer object: ', allOffers[objIndex]);
-  useEffect(() => {
-    handleUpdate();
-  });
-  const handleCreateOffer = async () => {
-    const newOffer = { offerId: newOfferId, offerTitle: '', offerText: '' };
-
-    await AsyncStorage.setItem('@offerId', `${newOfferId}`);
-    await setChosenOfferId(newOfferId);
-    await setAllOffers((currentOffers) => [newOffer, ...currentOffers]);
-    await setOfferId(newOfferId);
-
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
-  };
-  const handleUpdate = async () => {
-    console.log('Before update: ', allOffers[objIndex]);
-    allOffersCopy[objIndex].offerTitle = offerTitle;
-    allOffersCopy[objIndex].offerText = offerText;
-    //Log object to console again.
-    console.log('After update: ', allOffersCopy[objIndex]);
-    await setAllOffers(allOffersCopy);
-
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
-  };
-  const handleOfferTextUpdate = async (text) => {
-    //Log object to Console.
-
-    await setAllOffers(allOffersCopy);
-
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
-  };
   return (
     <View style={styles.screen}>
       <GlobalHeader navigation={navigation} />

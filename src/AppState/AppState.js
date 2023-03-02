@@ -107,22 +107,22 @@ export default function AppState() {
     chosenOfferId,
     setChosenOfferId,
   };
-  useEffect(async () => {
-    try {
-      const localOfferId = await AsyncStorage.getItem('@offerId');
-      if (localOfferId !== null) {
-        setOfferId(Number(localOfferId));
-      } else {
-        await AsyncStorage.setItem('@offerId', '0');
-      }
-      const localOffers = await AsyncStorage.getItem('@offers');
-      if (localOffers !== null) {
-        setAllOffers(JSON.parse(localOffers));
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+  //useEffect(async () => {
+  //  try {
+  //    const localOfferId = await AsyncStorage.getItem('@offerId');
+  //    if (localOfferId !== null) {
+  //      setOfferId(Number(localOfferId));
+  //    } else {
+  //      await AsyncStorage.setItem('@offerId', '0');
+  //    }
+  //    const localOffers = await AsyncStorage.getItem('@offers');
+  //    if (localOffers !== null) {
+  //      setAllOffers(JSON.parse(localOffers));
+  //    }
+  //  } catch (e) {
+  //    console.log(e);
+  //  }
+  //}, []);
   let [fontsLoaded] = useFonts({
     Mulish_200ExtraLight,
     Mulish_300Light,
