@@ -37,21 +37,14 @@ const Register = ({ navigation }) => {
   }
 
   const handleRegister = async () => {
-    //formData.append('Variables', {
-    //  fullName: fullName,
-    //  email: email,
-    //  password: password,
-    //  confirmPassword: confirmPassword,
-    //  bio: bio,
-    //  yearBorn: yearBorn
-    //});
-    try {
-      const response = await axios.get('http://localhost:3001/api/post/get');
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+
+    try{
+      const response = await fetch("http://10.3.15.75:3001/api/post/get/");
+      console.log(await response.json());
+    } catch (error){
+      console.log(error)
     }
-  };
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

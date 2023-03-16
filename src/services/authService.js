@@ -1,6 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-const API_URL = 'http://10.0.2.2:3001/api/auth/register';
+const API_URL = 'https://10.0.2.2:3001/api/auth/register';
 
 export async function registerUser(formData) {
   try {
