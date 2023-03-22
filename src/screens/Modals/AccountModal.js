@@ -3,11 +3,16 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
   Image,
   Modal,
+  Dimensions,
   PanResponder,
+  Button,
   Pressable,
 } from 'react-native';
+import MediumButton from '../components/Buttons/MediumButton';
+import { SmallButton } from '../components/Buttons/SmallButton';
 
 export default function AccountModal({ AppState, modalVisible, setModalVisible }) {
   const panResponder = PanResponder.create({
@@ -50,15 +55,10 @@ export default function AccountModal({ AppState, modalVisible, setModalVisible }
                   <Text style={{ color: 'black', fontSize: 16 }}>My name</Text>
                   <Text>age,bio</Text>
                 </View>
-                <View>
-                  <Pressable style={styles.doubleButton} onPress={() => handlePress()}>
-                    <Text style={styles.buttonText}>Edit profile</Text>
-                  </Pressable>
-                </View>
-                <View>
-                  <Pressable style={styles.doubleButton} onPress={() => handlePress()}>
-                    <Text style={styles.buttonText}>Change Password</Text>
-                  </Pressable>
+
+                <View style={styles.doubleButton}>
+                <MediumButton text="Change password"/>
+                <MediumButton text="Edit profile"/>
                 </View>
               </View>
 
@@ -73,29 +73,16 @@ export default function AccountModal({ AppState, modalVisible, setModalVisible }
 
               <View style={styles.activeListing}>
                 <Text>Offer 1</Text>
-                <View>
-                  <Pressable style={styles.button} onPress={() => handlePress()}>
-                    <Text style={styles.buttonText}>Link</Text>
-                  </Pressable>
-                </View>
+
+                <SmallButton text="Link"/>
               </View>
               <View style={styles.activeListing}>
                 <Text>Offer 2</Text>
-
-                <View>
-                  <Pressable style={styles.button} onPress={() => handlePress()}>
-                    <Text style={styles.buttonText}>Link</Text>
-                  </Pressable>
-                </View>
+                <SmallButton text="Link"/>
               </View>
               <View style={styles.activeListing}>
                 <Text>Offer 3</Text>
-
-                <View>
-                  <Pressable style={styles.button} onPress={() => handlePress()}>
-                    <Text style={styles.buttonText}>Link</Text>
-                  </Pressable>
-                </View>
+                <SmallButton text="Link"/>
               </View>
             </View>
           </View>
@@ -148,25 +135,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   doubleButton: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
-    marginTop: 25,
-    padding: 8,
-    backgroundColor: '#CF6F5A',
   },
   listingTitle: {
     fontSize: 16,
-  },
-  button: {
-    marginTop: 5,
-    backgroundColor: '#CF6F5A',
-    borderRadius: 12,
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    justifyContent: 'center',
-    borderRadius: 4,
-    padding: 8,
   },
 });

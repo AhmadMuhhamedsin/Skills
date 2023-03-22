@@ -1,5 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import AppState from './src/AppState/AppState';
 import registerNNPushToken from 'native-notify';
 

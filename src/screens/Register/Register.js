@@ -1,9 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TextInput, Button, Alert, Pressable, Image, ScrollView } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import validator from 'validator';
 import { registerUser } from '../../services/authService';
-import axios from 'axios';
 import mime from 'mime';
 const Register = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
@@ -90,6 +90,7 @@ const Register = ({ navigation }) => {
       </View>
       <Button title="Register" color="#DB9483" onPress={() => handleRegister()} />
     </ScrollView>
+
   );
 };
 
