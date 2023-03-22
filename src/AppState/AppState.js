@@ -88,43 +88,25 @@ export default function AppState() {
     chosenOfferId,
     setChosenOfferId,
   };
-  //useEffect(async () => {
-  //  try {
-  //    const localOfferId = await AsyncStorage.getItem('@offerId');
-  //    if (localOfferId !== null) {
-  //      setOfferId(Number(localOfferId));
-  //    } else {
-  //      await AsyncStorage.setItem('@offerId', '0');
-  //    }
-  //    const localOffers = await AsyncStorage.getItem('@offers');
-  //    if (localOffers !== null) {
-  //      setAllOffers(JSON.parse(localOffers));
-  //    }
-  //  } catch (e) {
-  //    console.log(e);
-  //  }
-  //}, []);
-  let [fontsLoaded] = useFonts({
-    Mulish_200ExtraLight,
-    Mulish_300Light,
-    Mulish_400Regular,
-    Mulish_500Medium,
-    Mulish_600SemiBold,
-    Mulish_700Bold,
-    Mulish_800ExtraBold,
-    Mulish_900Black,
-    Mulish_200ExtraLight_Italic,
-    Mulish_300Light_Italic,
-    Mulish_400Regular_Italic,
-    Mulish_500Medium_Italic,
-    Mulish_600SemiBold_Italic,
-    Mulish_700Bold_Italic,
-    Mulish_800ExtraBold_Italic,
-    Mulish_900Black_Italic,
-  });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
-    return <AppNavigation AppState={AppState} />;
-  }
+  const loadOffers = async () => {
+    try {
+      const localOfferId = await AsyncStorage.getItem('@offerId');
+      if (localOfferId !== null) {
+        setOfferId(Number(localOfferId));
+      } else {
+        await AsyncStorage.setItem('@offerId', '0');
+      }
+      const localOffers = await AsyncStorage.getItem('@offers');
+      if (localOffers !== null) {
+        setAllOffers(JSON.parse(localOffers));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    loadOffers();
+  }, []);
+
+  return <AppNavigation AppState={AppState} />;
 }
