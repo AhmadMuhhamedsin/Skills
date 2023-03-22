@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from '../screens/Home/Home';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CreateOffer from '../screens/CreateOffer/CreateOffer';
-import Welcome from '../screens/WelcomePage/Welcome';
+import Login from '../screens/WelcomePage/Welcome';
 import Register from '../screens/Register/Register';
 
 const Stack = createNativeStackNavigator();
@@ -13,7 +13,7 @@ export default function AppNavigation({ AppState }) {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Welcome" options={{ headerShown: false }}>
-          {(props) => <Welcome {...props} AppState={AppState} />}
+          {(props) => <Login {...props} AppState={AppState} />}
         </Stack.Screen>
         <Stack.Screen name="Register" options={{ headerShown: false }}>
           {(props) => <Register {...props} AppState={AppState} />}

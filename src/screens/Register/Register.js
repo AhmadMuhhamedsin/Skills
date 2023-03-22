@@ -1,23 +1,50 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput } from 'react-native';
-import MediumButton from '../components/Buttons/MediumButton';
-const navigation = useNavigation;
+import { Text, StyleSheet, View, TextInput, Button, Alert, TouchableOpacity} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const Register = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-const navigateHome = () => {
-  navigation.navigate('Home');
-};
-const Register = () => {
+  const handleRegister = async () => {
+    try {
+      await AsyncStorage.setItem("email", email);
+      await AsyncStorage.setItem("password", password);
+      navigation.navigate("Welcome");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log(email, password)
   return (
     <View style={styles.container}>
-      <Text style={styles.formLabel}> REGISTER </Text>
-      <View>
-        <TextInput placeholder="Username" style={styles.inputStyle} />
-        <TextInput placeholder="Email" style={styles.inputStyle} />
-        <TextInput secureTextEntry={true} placeholder="Password" style={styles.inputStyle} />
-        <TextInput secureTextEntry={true} placeholder="Confirm Password" style={styles.inputStyle} />
-        <MediumButton text="Register" medBfunc={navigateHome}/>
-      </View>
+      <TextInput
+        placeholder="Email"
+        style={styles.inputStyle}
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+      />
+      <TextInput
+        placeholder="Password"
+        style={styles.inputStyle}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        secureTextEntry
+      />
+       <TextInput
+        placeholder="Confirm Password"
+        style={styles.inputStyle}
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        secureTextEntry
+      />
+      <TouchableOpacity
+        style={{ backgroundColor: "lightgray", padding: 10, marginTop: 10 }}
+        onPress={handleRegister}
+      >
+        <Text>Register</Text>
+      </TouchableOpacity>
+
     </View>
   );
 };

@@ -16,6 +16,7 @@ export default function CreateOffer({ navigation, AppState }) {
   const [file, setFile] = useState(''); // [
   const formData = new FormData();
 
+
   const [type, setType] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
 
