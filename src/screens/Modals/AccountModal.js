@@ -141,5 +141,4 @@ const styles = StyleSheet.create({
   listingTitle: {
     fontSize: 16,
   },
-
 });
