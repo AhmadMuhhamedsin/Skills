@@ -1,100 +1,114 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Pressable, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import GlobalHeader from '../../Headers/GlobalHeader';
 import GlobalFooter from '../../Footers/GlobalFooter';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as DocumentPicker from 'expo-document-picker';
+import Dropdown from '../components/Dropdown';
+import axios from 'axios';
+import BigButton from '../components/Buttons/BigButton';
 
-export default function CreateOffer({ navigation, AppState, selectedOffer, authorAge, authorBio }) {
-  const { offerId, setOfferId, allOffers, setAllOffers, chosenOfferId, setChosenOfferId } = AppState;
+const baseUrl = ''; // Jordan pls share
+
+export default function CreateOffer({ navigation, AppState }) {
   const [offerTitle, setOfferTitle] = useState('');
   const [offerText, setOfferText] = useState('');
+  const [fileName, setFileName] = useState('no file attached');
+  const [file, setFile] = useState(''); // [
+  const formData = new FormData();
 
-  const newOfferId = offerId + 1;
-  let allOffersCopy = allOffers;
-  let objIndex = allOffers.findIndex((obj) => obj.offerId == chosenOfferId);
-  //Log object to Console.
-  console.log('Chosen offer object: ', allOffers[objIndex]);
-  useEffect(() => {
-    handleUpdate();
-  },[]);
-  const handleCreateOffer = async () => {
-    const newOffer = { offerId: newOfferId, offerTitle: '', offerText: '' };
 
-    await AsyncStorage.setItem('@offerId', `${newOfferId}`);
-    await setChosenOfferId(newOfferId);
-    await setAllOffers((currentOffers) => [newOffer, ...currentOffers]);
-    await setOfferId(newOfferId);
+  const [type, setType] = useState(0);
+  const [categoryId, setCategoryId] = useState(0);
 
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
+  const types = ['Type', 'Offer', 'Request'];
+  const subjects = ['Subject', 'Math', 'Science', 'English'];
+
+  let offerData = {
+    title: offerTitle,
+    description: offerText,
+    userId: 1, // Edit this to be dynamic
+    type: { type },
+    categoryId: { categoryId },
   };
-  const handleUpdate = async () => {
-    console.log('Before update: ', allOffers[objIndex]);
-    allOffersCopy[objIndex].offerTitle = offerTitle;
-    allOffersCopy[objIndex].offerText = offerText;
-    //Log object to console again.
-    console.log('After update: ', allOffersCopy[objIndex]);
-    await setAllOffers(allOffersCopy);
-
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
+  const PublishPost = () => {
+    if (offerTitle === '' || offerText === '') {
+      alert('Please fill all fields');
+      return;
+    }
+    formData.append('data', JSON.stringify(offerData));
+    formData.append('File', file);
+    console.log('KOGU FORMDATA MIS SENDI LÄHEB ON: ', formData);
+    axios({
+      url: baseUrl,
+      method: 'POST',
+      data: formData,
+    });
+    alert('Post published!');
+    navigation.navigate('Home');
   };
-  const handleOfferTextUpdate = async (text) => {
-    //Log object to Console.
 
-    await setAllOffers(allOffersCopy);
+  async function _pickDocument() {
+    let result = await DocumentPicker.getDocumentAsync({});
+    if (result.type === 'success') {
+      if (
+        result.mimeType === 'application/vnd.ms-powerpoint' ||
+        result.mimeType === 'application/pdf' ||
+        result.mimeType === 'application/msword' ||
+        result.mimeType === 'image/png' ||
+        result.mimeType === 'image/jpeg' ||
+        result.mimeType === 'image/jpg'
+      ) {
+        if (result.size < 10000000) {
+          setFile(result);
+          alert('Uploaded file: ' + result.name);
+          console.log('Category ID: ', categoryId);
+          console.log('Type: ', type);
+          setFileName(result.name);
+        } else {
+          alert('File is too big');
+        }
+      } else {
+        alert('File type is not supported');
+      }
+    }
+  }
 
-    let localOffers = JSON.stringify(allOffers);
-    await AsyncStorage.setItem('@offers', localOffers);
-  };
   return (
     <View style={styles.screen}>
       <GlobalHeader navigation={navigation} />
 
       <View style={styles.body}>
         <ScrollView contentContainerStyle={styles.scrollViewCont}>
-          <View style={styles.welcomeCont}>
-            <Text
-              style={{
-                fontFamily: 'Mulish_800ExtraBold',
-                fontSize: 24,
-              }}
-            >
-              Tere, saabusid Create lehele.
-            </Text>
-            <Text
-              style={{
-                marginTop: 8,
-                fontFamily: 'Mulish_400Regular',
-                fontSize: 16,
-                color: '#000',
-              }}
-            >
-              Siin saad koostada oma enda postituse
-            </Text>
+          <Text style={styles.welcomeCont}>Here you can make a new post</Text>
+
+          <View style={styles.itemCont}>
+            <Dropdown defaultText={'Subject'} listItems={subjects} onSelectAction={(index) => setCategoryId(index)} />
+            <Dropdown defaultText={'Type'} listItems={types} onSelectAction={(index) => setType(index)} />
           </View>
           <View style={styles.createCont}>
             <TextInput
-              style={{ fontFamily: 'Mulish_800ExtraBold', fontSize: 32 }}
+              style={{ fontSize: 32 }}
               value={offerTitle}
               placeholder={'Postituse pealkiri'}
               onChangeText={setOfferTitle}
             ></TextInput>
             <TextInput
-              style={{ fontFamily: 'Mulish_400Regular', fontSize: 24, marginTop: 16 }}
+              style={{ fontSize: 24, marginTop: 16 }}
               value={offerText}
               placeholder={'Postituse sisu'}
               onChangeText={setOfferText}
               multiline={true}
             ></TextInput>
           </View>
+          <View>
+            <Pressable style={styles.button} onPress={_pickDocument}>
+              <Text style={styles.buttonText}>Add file (optional)</Text>
+            </Pressable>
+            <Text>Attached file: {fileName}</Text>
+          </View>
         </ScrollView>
       </View>
-      <View style={styles.saveButtonCont}>
-        <TouchableOpacity style={styles.saveButton} onPress={() => handleCreateOffer()}>
-          <Text style={styles.saveButtonText}>SAVE</Text>
-        </TouchableOpacity>
-      </View>
+      <BigButton text="PUBLISH" bigBfunc={PublishPost} />
       <GlobalFooter AppState={AppState} navigation={navigation} />
     </View>
   );
@@ -105,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#D7DDEC',
+    backgroundColor: '#FAF8F1',
   },
   body: {
     flex: 7,
@@ -152,7 +166,39 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     color: '#fff',
-    fontFamily: 'Mulish_800ExtraBold',
     fontSize: 16,
+  },
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: 'darkblue',
+    paddingLeft: 12,
+    paddingRight: 16,
+    paddingTop: 11,
+    paddingBottom: 8,
+    width: 130,
+    height: 42,
+    color: '#696767',
+  },
+  button: {
+    marginTop: 5,
+    backgroundColor: '#CF6F5A',
+    borderRadius: 12,
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    justifyContent: 'center',
+    borderRadius: 4,
+    padding: 8,
+  },
+  itemCont: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    paddingLeft: '3%',
+    paddingRight: '3%',
+    gap: 10,
   },
 });

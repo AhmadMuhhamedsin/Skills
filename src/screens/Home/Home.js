@@ -4,6 +4,10 @@ import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'rea
 import GlobalFooter from '../../Footers/GlobalFooter';
 import GlobalHeader from '../../Headers/GlobalHeader';
 import OfferModal from '../Modals/OfferModal';
+import SelectDropdown from 'react-native-select-dropdown';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Dropdown from '../components/Dropdown';
+import Offer from '../components/Offer';
 export default function Home({ offer, navigation, AppState }) {
   const { allOffers, setOffer, setAllOffers } = AppState;
 
@@ -14,24 +18,20 @@ export default function Home({ offer, navigation, AppState }) {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
+
+  const subjects = ['Subject', 'Math', 'Science', 'English'];
+  const sorting = ['Sorting', 'Newest', 'Oldest', 'A-Z', 'Z-A'];
+
   return (
     <View style={styles.screen}>
       <GlobalHeader navigation={navigation} />
       <View style={styles.body}>
-        <ScrollView contentContainerStyle={styles.scrollViewCont} style={styles.scrollView}>
+        <ScrollView contentContainerStyle={styles.scrollViewCont} style={styles.scrollView} nestedScrollEnabled={true}>
           <View style={styles.welcomeCont}>
-            <Text
-              style={{
-                fontFamily: 'Mulish_800ExtraBold',
-                fontSize: 32,
-              }}
-            >
-              Offers
-            </Text>
+            <Text style={{ fontSize: 32 }}>Offers</Text>
             <Text
               style={{
                 marginTop: 8,
-                fontFamily: 'Mulish_500Medium',
                 color: '#7C7C7C',
                 fontSize: 16,
               }}
@@ -41,99 +41,14 @@ export default function Home({ offer, navigation, AppState }) {
           </View>
 
           <View style={styles.itemCont}>
-            <TouchableOpacity>
-              <View style={styles.item}>
-                <Text
-                  style={{
-                    fontFamily: 'Mulish_600SemiBold,',
-                    fontSize: 14,
-                    color: '#565656',
-                  }}
-                >
-                  Subject
-                </Text>
-                <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.item}>
-                <Text
-                  style={{
-                    fontFamily: 'Mulish_600SemiBold,',
-                    fontSize: 14,
-                    color: '#565656',
-                  }}
-                >
-                  Dates
-                </Text>
-                <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.item}>
-                <Text
-                  style={{
-                    fontFamily: 'Mulish_600SemiBold,',
-                    fontSize: 16,
-                    color: '#565656',
-                  }}
-                >
-                  Sorting
-                </Text>
-                <Image style={styles.logo} source={require('../../assets/images/arrowdown.png')} />
-              </View>
-            </TouchableOpacity>
+            <Dropdown defaultText={'Subject'} listItems={subjects} />
+            <Dropdown defaultText={'Sorting'} listItems={sorting} />
           </View>
 
           {allOffers.map((offer, index) => {
             return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => {
-                  updateSelectedOffer(offer);
-                  setModalVisible(!modalVisible);
-                }}
-                style={[styles.noteCont, styles.shadowProp]}
-              >
-                <Text
-                  style={{
-                    fontFamily: 'Mulish_800ExtraBold',
-                    fontSize: 24,
-                    color: '#1E1D1D',
-                  }}
-                >
-                  {offer.author.offerAuthor}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'Mulish_400Regular',
-                    marginTop: 4,
-                    fontSize: 14,
-                  }}
-                  numberOfLines={1}
-                >
-                  Subject: {offer.subject}, Age: {offer.author.age}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'Mulish_400Regular',
-                    marginTop: 4,
-                    fontSize: 14,
-                  }}
-                  numberOfLines={1}
-                >
-                  Wednesdays
-                </Text>
-                {offer === selectedOffer && (
-                  <OfferModal
-                    AppState={AppState}
-                    selectedOffer={offer}
-                    authorAge={offer.author.age}
-                    authorBio={offer.author.bio}
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                  />
-                )}
+              <TouchableOpacity>
+                <Offer offer={offer} key={index} AppState={AppState}/>
               </TouchableOpacity>
             );
           })}
@@ -170,7 +85,7 @@ const styles = StyleSheet.create({
   },
   shadowProp: {
     shadowOffset: { width: -2, height: 2 },
-    shadowColor: '#171717',
+    shadowColor: '#17717',
     shadowOpacity: 0.05,
     shadowRadius: 1,
   },
@@ -199,8 +114,17 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     paddingTop: 11,
     paddingBottom: 8,
-    width: 97,
+    width: '50%',
     height: 42,
     color: '#696767',
   },
+  dropdown1BtnStyle: {
+    width: '80%',
+    height: 50,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#444',
+  },
+  dropdownBtnTxtStyle: { color: 'gray', fontWeight: 'bold', textAlign: 'left', fontSize: 14 },
 });

@@ -48,6 +48,7 @@ const Login = ({ navigation }) => {
       >
         <Text>Login</Text>
       </TouchableOpacity>
+
     </View>
   );
 };
@@ -80,31 +81,6 @@ const styles = StyleSheet.create({
     marginLeft: 70,
     marginBottom: 20,
     color: '#7C7C7C',
-  },
-  nextBox: {
-    width: 200,
-    height: 40,
-    marginLeft: 95,
-    marginTop: 16,
-    borderRadius: 4,
-    borderWidth: 1,
-    backgroundColor: '#CF6F5A',
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    justifyContent: 'center',
-    borderRadius: 4,
-    padding: 8,
-  },
-  button: {
-    width: 200,
-    height: 40,
-    marginLeft: 95,
-    marginTop: 16,
-    borderRadius: 4,
-    borderWidth: 1,
-    backgroundColor: '#CF6F5A',
   },
 });
 export default Login

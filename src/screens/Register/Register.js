@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TextInput, Button, Alert, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -43,6 +44,7 @@ const Register = ({ navigation }) => {
       >
         <Text>Register</Text>
       </TouchableOpacity>
+
     </View>
   );
 };
@@ -61,7 +63,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   inputStyle: {
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
     width: 300,
     height: 40,
     paddingHorizontal: 10,
