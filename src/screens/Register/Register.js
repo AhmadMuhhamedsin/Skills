@@ -15,6 +15,7 @@ const Register = ({ navigation }) => {
   const [image, setImage] = useState('');
   let formData = new FormData();
 
+
   async function _pickImage() {
     const result = await DocumentPicker.getDocumentAsync({});
     if (result.size < 10000000) {
@@ -37,13 +38,13 @@ const Register = ({ navigation }) => {
   }
 
   const handleRegister = async () => {
-
     try{
-      const response = await fetch("http://10.3.15.75:3001/api/post/get/");
+      const response = await fetch(process.env.REACT_APP_API_IP + "/api/post/get/");
       console.log(await response.json());
     } catch (error){
       console.log(error)
     }
+    navigation.navigate('Home')
   }
 
   return (

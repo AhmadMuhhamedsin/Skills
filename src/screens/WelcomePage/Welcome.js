@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Button, TextInput, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MediumButton from '../components/Buttons/MediumButton';
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,12 +43,8 @@ const Login = ({ navigation }) => {
       <TouchableOpacity style={styles.registerOpt}>
         <Text onPress={() => handlePressRegister()}>Register</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleLogin}
-      >
-        <Text>Login</Text>
-      </TouchableOpacity>
+
+      <MediumButton medBfunc={handleLogin} text="Login"/>
 
     </View>
   );
