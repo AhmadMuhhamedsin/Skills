@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import AppNavigation from '../AppNavigation/AppNavigation';
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import Spinner from 'react-native-loading-spinner-overlay';
+
+import { Modal } from 'react-native-modal';
+
 export default function AppState() {
+  const [isLoading, setIsLoading] = useState(true);
   const [offerId, setOfferId] = useState(0);
   const [allOffers, setAllOffers] = useState([
     {
@@ -91,22 +97,67 @@ export default function AppState() {
   const loadOffers = async () => {
     try {
       const localOfferId = await AsyncStorage.getItem('@offerId');
+      console.log('localOfferId:', localOfferId);
       if (localOfferId !== null) {
         setOfferId(Number(localOfferId));
       } else {
         await AsyncStorage.setItem('@offerId', '0');
       }
       const localOffers = await AsyncStorage.getItem('@offers');
+      console.log('localOffers:', localOffers);
       if (localOffers !== null) {
         setAllOffers(JSON.parse(localOffers));
       }
+      
+
     } catch (e) {
       console.log(e);
     }
   };
   useEffect(() => {
+    
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+    
     loadOffers();
+    return () => clearTimeout(timer);
   }, []);
-
+  
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //     loadOffers();
+  //   }, 5000);
+  // }, []);
+  // useEffect(() => {
+  //   loadOffers();
+  // }, []);
+  
+  // setTimeout(() => {
+  //   setIsLoading(false);
+  // }, 2000);
+  if (isLoading) {
+    // Show a spinner while loading
+    return (
+      <View style={styles.container}>
+        <Spinner visible={isLoading} textContent={'Loading...'}  textStyle={styles.spinnerText} overlayColor={'rgba(0, 0, 0, 0.5)'}
+  animation={'fade'}
+  size={'large'} color={'#F4F3EC'} backgroundColor={'#00000080'}  />
+      </View>
+    );
+  }
+ 
   return <AppNavigation AppState={AppState} />;
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  spinnerText: {
+    color: 'black',
+    marginTop: 10,
+  },
+});
