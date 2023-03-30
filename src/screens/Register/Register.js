@@ -5,6 +5,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import validator from 'validator';
 import { registerUser } from '../../services/authService';
 import mime from 'mime';
+import { SpinnerOverlay } from '../../AppState/AppState'
 const Register = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ const Register = ({ navigation }) => {
   const [bio, setBio] = useState('');
   const [yearBorn, setYearBorn] = useState('1990');
   const [image, setImage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   let formData = new FormData();
 
 
@@ -39,12 +41,23 @@ const Register = ({ navigation }) => {
 
   const handleRegister = async () => {
     try{
+      setIsLoading(true);
       const response = await fetch(process.env.REACT_APP_API_IP + "/api/post/get/");
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
       console.log(await response.json());
+      setTimeout(() => {
+        setIsLoading(false);
+        
+      }, 5000);
+      
     } catch (error){
+      setIsLoading(false);
       console.log(error)
+      // alert("Failed to register. Please try again later.");
     }
-    navigation.navigate('Home')
+    navigation.navigate('Home'); 
   }
 
   return (
@@ -89,7 +102,7 @@ const Register = ({ navigation }) => {
           <Text style={styles.pictureInputStyle}>Choose a picture</Text>
         </Pressable>
       </View>
-      <Button title="Register" color="#DB9483" onPress={() => handleRegister()} />
+      {isLoading ? <SpinnerOverlay visible={true} /> : <Button title="Register" color="#DB9483" onPress={handleRegister} />}
     </ScrollView>
 
   );

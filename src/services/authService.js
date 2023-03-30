@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 import Config from 'react-native-config';
-const API_URL = `${Config.REACT_APP_API_IP}/api/auth/register`;
+const API_URL = `${process.env.REACT_APP_API_IP}:3001/api/auth/register`;
 
 export async function registerUser(formData) {
   try {

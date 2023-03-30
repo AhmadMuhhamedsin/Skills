@@ -6,9 +6,22 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import { Modal } from 'react-native-modal';
-
+function SpinnerOverlay({ visible }) {
+  return (
+    <Spinner
+      visible={visible}
+      textContent={'Loading...'}
+      textStyle={styles.spinnerText}
+      overlayColor={'rgba(0, 0, 0, 0.5)'}
+      animation={'fade'}
+      size={'large'}
+      color={'#F4F3EC'}
+      backgroundColor={'#00000080'}
+    />
+  );
+}
 export default function AppState() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [offerId, setOfferId] = useState(0);
   const [allOffers, setAllOffers] = useState([
     {
@@ -115,40 +128,29 @@ export default function AppState() {
     }
   };
   useEffect(() => {
-    
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-    
     loadOffers();
-    return () => clearTimeout(timer);
   }, []);
-  
   // useEffect(() => {
-  //   setTimeout(() => {
+  //   setIsLoading(true);
+  //   const timer = setTimeout(() => {
   //     setIsLoading(false);
-  //     loadOffers();
-  //   }, 5000);
-  // }, []);
-  // useEffect(() => {
+  //   }, 3000);
+
   //   loadOffers();
+  //   return () => clearTimeout(timer);
   // }, []);
-  
-  // setTimeout(() => {
-  //   setIsLoading(false);
-  // }, 2000);
+
   if (isLoading) {
     // Show a spinner while loading
-    return (
-      <View style={styles.container}>
-        <Spinner visible={isLoading} textContent={'Loading...'}  textStyle={styles.spinnerText} overlayColor={'rgba(0, 0, 0, 0.5)'}
-  animation={'fade'}
-  size={'large'} color={'#F4F3EC'} backgroundColor={'#00000080'}  />
-      </View>
-    );
+    return <SpinnerOverlay visible={isLoading} />;
   }
- 
-  return <AppNavigation AppState={AppState} />;
+  
+  return (
+    <View style={{ flex: 1 }}>
+      <AppNavigation AppState={AppState} />
+    </View>
+  );
+  // return <AppNavigation AppState={AppState} />;
 }
 const styles = StyleSheet.create({
   container: {
@@ -161,3 +163,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+export { SpinnerOverlay };
