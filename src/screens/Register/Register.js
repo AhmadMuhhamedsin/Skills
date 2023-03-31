@@ -6,6 +6,8 @@ import validator from 'validator';
 import { registerUser } from '../../services/authService';
 import mime from 'mime';
 import { SpinnerOverlay } from '../../AppState/AppState'
+import useFetch from '../components/Fetch';
+import MediumButton from '../components/Buttons/MediumButton';
 const Register = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -39,26 +41,9 @@ const Register = ({ navigation }) => {
     formData.append('File', result);
   }
 
-  const handleRegister = async () => {
-    try{
-      setIsLoading(true);
-      const response = await fetch(process.env.REACT_APP_API_IP + "/api/post/get/");
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      console.log(await response.json());
-      setTimeout(() => {
-        setIsLoading(false);
-        
-      }, 5000);
-      
-    } catch (error){
-      setIsLoading(false);
-      console.log(error)
-      // alert("Failed to register. Please try again later.");
-    }
-    navigation.navigate('Home'); 
-  }
+const handleRegister = () => {
+  useFetch("/api/post/get")
+}
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -102,7 +87,7 @@ const Register = ({ navigation }) => {
           <Text style={styles.pictureInputStyle}>Choose a picture</Text>
         </Pressable>
       </View>
-      {isLoading ? <SpinnerOverlay visible={true} /> : <Button title="Register" color="#DB9483" onPress={handleRegister} />}
+      {isLoading ? <SpinnerOverlay visible={true} /> : <MediumButton text="Register" color="#DB9483" medBfunc={handleRegister} />}
     </ScrollView>
 
   );
