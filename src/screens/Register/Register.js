@@ -5,6 +5,8 @@ import * as DocumentPicker from 'expo-document-picker';
 import validator from 'validator';
 import { registerUser } from '../../services/authService';
 import mime from 'mime';
+import useFetch from '../components/Fetch';
+import MediumButton from '../components/Buttons/MediumButton';
 const Register = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -37,15 +39,9 @@ const Register = ({ navigation }) => {
     formData.append('File', result);
   }
 
-  const handleRegister = async () => {
-    try{
-      const response = await fetch(process.env.REACT_APP_API_IP + "/api/post/get/");
-      console.log(await response.json());
-    } catch (error){
-      console.log(error)
-    }
-    navigation.navigate('Home')
-  }
+const handleRegister = () => {
+  useFetch("/api/post/get")
+}
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -89,7 +85,7 @@ const Register = ({ navigation }) => {
           <Text style={styles.pictureInputStyle}>Choose a picture</Text>
         </Pressable>
       </View>
-      <Button title="Register" color="#DB9483" onPress={() => handleRegister()} />
+      <MediumButton text="Register" color="#DB9483" medBfunc={handleRegister} />
     </ScrollView>
 
   );
