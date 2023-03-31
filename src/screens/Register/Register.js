@@ -5,6 +5,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import validator from 'validator';
 import { registerUser } from '../../services/authService';
 import mime from 'mime';
+import { SpinnerOverlay } from '../../AppState/AppState'
 import useFetch from '../components/Fetch';
 import MediumButton from '../components/Buttons/MediumButton';
 const Register = ({ navigation }) => {
@@ -15,6 +16,7 @@ const Register = ({ navigation }) => {
   const [bio, setBio] = useState('');
   const [yearBorn, setYearBorn] = useState('1990');
   const [image, setImage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   let formData = new FormData();
 
 
@@ -85,7 +87,7 @@ const handleRegister = () => {
           <Text style={styles.pictureInputStyle}>Choose a picture</Text>
         </Pressable>
       </View>
-      <MediumButton text="Register" color="#DB9483" medBfunc={handleRegister} />
+      {isLoading ? <SpinnerOverlay visible={true} /> : <MediumButton text="Register" color="#DB9483" medBfunc={handleRegister} />}
     </ScrollView>
 
   );
