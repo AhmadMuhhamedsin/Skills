@@ -1,20 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Modal,
-  Dimensions,
-  PanResponder,
-  Button,
-  Pressable,
-} from 'react-native';
-import MediumButton from '../components/Buttons/MediumButton';
-import { SmallButton } from '../components/Buttons/SmallButton';
+import { View, Text, Modal, Image } from 'react-native';
+import { PanResponder } from 'react-native-gesture-handler';
+import MediumButton from './MediumButton';
+import SmallButton from './SmallButton';
+import styles from './styles';
+import useFetch from '../components/Fetch';
 
 export default function AccountModal({ AppState, modalVisible, setModalVisible }) {
+  const [user, setUser] = useState(null);
+
+  const [listings, setListings] = useState([]);
+
+  const { data: userData, loading: userLoading } = useFetch('/api/user');
+  const { data: listingsData, loading: listingsLoading } = useFetch(`/api/listings?userId=${userData?.id}&_sort=createdAt&_order=desc&_limit=3`);
+
+  useEffect(() => {
+    setUser(userData);
+    setListings(listingsData);
+  }, [userData, listingsData]);
+
+  if (userLoading || listingsLoading) {
+    return <Spinner />;
+  }
+  // useEffect(() => {
+  //   async function fetchUserData() {
+  //     const userResponse = await useFetch('/api/user');
+  //     const user = await userResponse.json();
+  //     setUser(user);
+  
+  //     const listingsResponse = await useFetch(`/api/listings?userId=${user.id}&_sort=createdAt&_order=desc&_limit=3`);
+  //     const listings = await listingsResponse.json();
+  //     setListings(listings);
+  //   }
+  //   fetchUserData();
+  // }, []);
+
+
+
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (evt, gestureState) => {
       const { dy } = gestureState;
@@ -49,41 +71,36 @@ export default function AccountModal({ AppState, modalVisible, setModalVisible }
             <View style={styles.titleContainer}>
               <Text style={{ marginTop: 10, color: 'black', fontSize: 20 }}>My profile</Text>
             </View>
-            <View style={styles.detailsContainer}>
-              <View style={styles.detailsInfo}>
+            {user && (
+              <View style={styles.detailsContainer}>
+                <View style={styles.detailsInfo}>
+                  <View>
+                    <Text style={{ color: 'black', fontSize: 16 }}>{user.name}</Text>
+                    <Text>{user.yearBorn}, {user.bio}</Text>
+                  </View>
+
+                  <View style={styles.doubleButton}>
+                    <MediumButton text="Change password"/>
+                    <MediumButton text="Edit profile"/>
+                  </View>
+                </View>
+
                 <View>
-                  <Text style={{ color: 'black', fontSize: 16 }}>My name</Text>
-                  <Text>age,bio</Text>
-                </View>
-
-                <View style={styles.doubleButton}>
-                <MediumButton text="Change password"/>
-                <MediumButton text="Edit profile"/>
+                  <Image source={{ uri: user.avatarUrl }} />
                 </View>
               </View>
-
-              <View>
-                <Image source={require('../../assets/images/profilepicture.png')} />
-              </View>
-            </View>
+            )}
             <Separator />
-
+            
             <View>
-              <Text style={styles.listingTitle}>My active listings</Text>
+            <Text style={styles.listingTitle}>My active listings</Text>
 
-              <View style={styles.activeListing}>
-                <Text>Offer 1</Text>
-
-                <SmallButton text="Link"/>
-              </View>
-              <View style={styles.activeListing}>
-                <Text>Offer 2</Text>
-                <SmallButton text="Link"/>
-              </View>
-              <View style={styles.activeListing}>
-                <Text>Offer 3</Text>
-                <SmallButton text="Link"/>
-              </View>
+              {listings.map((listing) => (
+                <View key={listing.id} style={styles.activeListing}>
+                  <Text>{listing.title}</Text>
+                  <SmallButton text="Link"/>
+                </View>
+              ))}
             </View>
           </View>
         </View>
