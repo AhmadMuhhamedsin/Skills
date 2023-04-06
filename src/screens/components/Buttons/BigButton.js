@@ -1,7 +1,7 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import React from 'react';
 
-export default function BigButton({ text, bigBfunc}) {
+export default function BigButton({ text, bigBfunc }) {
   return (
     <View style={styles.saveButtonCont}>
       <Pressable style={styles.saveButton} onPress={() => bigBfunc()}>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   saveButton: {
     position: 'absolute',
     backgroundColor: '#CF6F5A',
-    padding: 20,
+    padding: 16,
     alignItems: 'center',
     borderRadius: 8,
     shadowColor: '#171717',
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 20,
+    fontWeight: 'semibold',
   },
 });

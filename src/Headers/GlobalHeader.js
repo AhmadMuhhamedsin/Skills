@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   },
   iconCont: {
     padding: 24,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignContent: 'center',

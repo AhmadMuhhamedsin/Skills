@@ -6,10 +6,10 @@ export default function GlobalFooter({ navigation, AppState }) {
   return (
     <View style={styles.footerCont}>
       <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-        <Icon name="home" size={30} color="#FF8888" />
+        <Icon name="home" size={30} color="#CF6F5A" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('CreateOffer')}>
-        <Icon name="plus-square-o" size={30} color="#FF8888" />
+        <Icon name="plus-square-o" size={30} color="#CF6F5A" />
       </TouchableOpacity>
     </View>
   );
