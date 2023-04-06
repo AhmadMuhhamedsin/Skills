@@ -3,9 +3,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
 import GlobalFooter from '../../Footers/GlobalFooter';
 import GlobalHeader from '../../Headers/GlobalHeader';
-import OfferModal from '../Modals/OfferModal';
-import SelectDropdown from 'react-native-select-dropdown';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Dropdown from '../components/Dropdown';
 import Offer from '../components/Offer';
 
@@ -20,6 +17,7 @@ export default function Home({ offer, navigation, AppState }) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [categoryId, setCategoryId] = useState(0);
   const subjects = ['Subject', 'Math', 'Science', 'English'];
   const sorting = ['Sorting', 'Newest', 'Oldest', 'A-Z', 'Z-A'];
   console.log('home');
@@ -42,7 +40,7 @@ export default function Home({ offer, navigation, AppState }) {
           </View>
 
           <View style={styles.itemCont}>
-            <Dropdown defaultText={'Subject'} listItems={subjects} />
+            <Dropdown defaultText={'Subject'} listItems={subjects} onSelectAction={(index) => setCategoryId(index)}/>
             <Dropdown defaultText={'Sorting'} listItems={sorting} />
           </View>
 

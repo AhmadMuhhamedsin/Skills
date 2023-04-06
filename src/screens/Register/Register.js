@@ -57,6 +57,7 @@ const Register = ({ navigation }) => {
       console.log(err);
       alert('Error registering, please try again');
     }
+    navigation.navigate('Home')
   }
 
   const handleRegister = async (e) => {

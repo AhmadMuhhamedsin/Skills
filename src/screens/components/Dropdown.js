@@ -13,9 +13,9 @@ export default function Dropdown({ defaultText, listItems, onSelectAction, index
         return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'gray'} size={18} />;
       }}
       data={listItems}
-      onSelect={(selectedItem, index) => {
+      onSelect={() => {
         {
-          onSelectAction(index);
+          onSelectAction;
         }
       }}
     />

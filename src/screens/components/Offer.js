@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity} from 'react-native';
 import OfferModal from '../Modals/OfferModal';
 
 export default function Offer({ offer, AppState }) {
@@ -21,7 +21,6 @@ export default function Offer({ offer, AppState }) {
     >
       <Text
         style={{
-          fontFamily: 'Mulish_800ExtraBold',
           fontSize: 24,
           color: '#1E1D1D',
         }}
@@ -30,7 +29,6 @@ export default function Offer({ offer, AppState }) {
       </Text>
       <Text
         style={{
-          fontFamily: 'Mulish_400Regular',
           marginTop: 4,
           fontSize: 14,
         }}
@@ -40,7 +38,6 @@ export default function Offer({ offer, AppState }) {
       </Text>
       <Text
         style={{
-          fontFamily: 'Mulish_400Regular',
           marginTop: 4,
           fontSize: 14,
         }}
