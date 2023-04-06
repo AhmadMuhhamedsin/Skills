@@ -4,7 +4,6 @@ import OfferModal from '../Modals/OfferModal';
 
 export default function Offer({ offer, AppState }) {
   const { setAllOffers } = AppState;
-
   const [selectedOffer, setSelectedOffer] = useState(null);
   const updateSelectedOffer = (offer) => {
     setSelectedOffer(offer);
@@ -58,7 +57,7 @@ export default function Offer({ offer, AppState }) {
       )}
     </TouchableOpacity>
   );
-};
+}
 
 const styles = StyleSheet.create({
   screen: {

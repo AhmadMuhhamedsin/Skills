@@ -1,12 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TextInput, Button, Alert, Pressable, Image, ScrollView } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
+
+import validateRegister from './validateRegister';
 import validator from 'validator';
 import { registerUser } from '../../services/authService';
 import mime from 'mime';
-import { SpinnerOverlay } from '../../AppState/AppState'
-import useFetch from '../components/Fetch';
+
 import MediumButton from '../components/Buttons/MediumButton';
 const Register = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
@@ -16,9 +16,6 @@ const Register = ({ navigation }) => {
   const [bio, setBio] = useState('');
   const [yearBorn, setYearBorn] = useState('1990');
   const [image, setImage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  let formData = new FormData();
-
 
   async function _pickImage() {
     const result = await DocumentPicker.getDocumentAsync({});
@@ -38,12 +35,47 @@ const Register = ({ navigation }) => {
     } else {
       Alert.alert('Please select an image file less than 10MB, your file is ' + result.size / 1000000 + 'MB');
     }
-    formData.append('File', result);
   }
 
-const handleRegister = () => {
-  useFetch("/api/post/get")
-}
+
+  async function register() {
+    const formData = new FormData();
+    console.log(image.mimeType);
+    formData.append('email', email.toString());
+    formData.append('password', password === confirmPassword ? password.toString() : null);
+    formData.append('bio', bio.toString());
+    formData.append('yearBorn', yearBorn);
+    formData.append('name', fullName.toString());
+    formData.append('file', {
+      uri: image.uri,
+      type: image.mimeType,
+      name: image.name,
+    });
+    console.log(formData);
+    try {
+      const response = await fetch('http://172.20.10.99:3001/api/auth/register', {
+        method: 'post',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        body: formData,
+      });
+      response && alert('User registered successfully');
+    } catch (err) {
+      console.log(err);
+      alert('Error registering, please try again');
+    }
+    navigation.navigate('Home')
+  }
+
+  const handleRegister = async (e) => {
+    console.log('register');
+    try {
+      const validate = await validateRegister(email, password, confirmPassword, bio, fullName, yearBorn, image);
+      validate ? Alert.alert(validate) : register();
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -87,9 +119,10 @@ const handleRegister = () => {
           <Text style={styles.pictureInputStyle}>Choose a picture</Text>
         </Pressable>
       </View>
-      {isLoading ? <SpinnerOverlay visible={true} /> : <MediumButton text="Register" color="#DB9483" medBfunc={handleRegister} />}
-    </ScrollView>
 
+      <MediumButton text="Register" medBfunc={() => handleRegister()} />
+
+    </ScrollView>
   );
 };
 

@@ -5,8 +5,12 @@ import GlobalFooter from '../../Footers/GlobalFooter';
 import GlobalHeader from '../../Headers/GlobalHeader';
 import Dropdown from '../components/Dropdown';
 import Offer from '../components/Offer';
-export default function Home({  navigation, AppState }) {
-  const { allOffers,  } = AppState;
+
+
+export default function Home({ offer, navigation, AppState }) {
+  const { allOffers, setOffer, setAllOffers } = AppState;
+
+
 
   useIsFocused();
   const [selectedOffer, setSelectedOffer] = useState(null);
@@ -19,7 +23,6 @@ export default function Home({  navigation, AppState }) {
   const [categoryId, setCategoryId] = useState(0);
   const subjects = ['Subject', 'Math', 'Science', 'English'];
   const sorting = ['Sorting', 'Newest', 'Oldest', 'A-Z', 'Z-A'];
-  
   return (
     <View style={styles.screen}>
       <GlobalHeader navigation={navigation} />
@@ -46,7 +49,7 @@ export default function Home({  navigation, AppState }) {
           {allOffers.map((offer, index) => {
             return (
               <TouchableOpacity>
-                <Offer offer={offer} key={index} AppState={AppState}/>
+                <Offer offer={offer} key={index} AppState={AppState} />
               </TouchableOpacity>
             );
           })}
