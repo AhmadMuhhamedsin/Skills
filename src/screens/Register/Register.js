@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TextInput, Button, Alert, Pressable, Image, ScrollView } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
+
 import validateRegister from './validateRegister';
+import validator from 'validator';
+import { registerUser } from '../../services/authService';
+import mime from 'mime';
+
 import MediumButton from '../components/Buttons/MediumButton';
 const Register = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
@@ -32,6 +37,7 @@ const Register = ({ navigation }) => {
     }
   }
 
+
   async function register() {
     const formData = new FormData();
     console.log(image.mimeType);
@@ -47,7 +53,7 @@ const Register = ({ navigation }) => {
     });
     console.log(formData);
     try {
-      const response = await fetch('http://172.20.10.10:3001/api/auth/register', {
+      const response = await fetch('http://172.20.10.99:3001/api/auth/register', {
         method: 'post',
         headers: { 'Content-Type': 'multipart/form-data' },
         body: formData,
@@ -113,7 +119,9 @@ const Register = ({ navigation }) => {
           <Text style={styles.pictureInputStyle}>Choose a picture</Text>
         </Pressable>
       </View>
+
       <MediumButton text="Register" medBfunc={() => handleRegister()} />
+
     </ScrollView>
   );
 };

@@ -9,7 +9,9 @@ import Register from '../screens/Register/Register';
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation({ AppState }) {
+  
   return (
+    
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" options={{ headerShown: false }}>
@@ -24,7 +26,9 @@ export default function AppNavigation({ AppState }) {
         <Stack.Screen name="CreateOffer" options={{ headerShown: false }}>
           {(props) => <CreatePost {...props} AppState={AppState} />}
         </Stack.Screen>
+        
       </Stack.Navigator>
     </NavigationContainer>
+    
   );
 }

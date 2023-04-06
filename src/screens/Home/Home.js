@@ -6,8 +6,11 @@ import GlobalHeader from '../../Headers/GlobalHeader';
 import Dropdown from '../components/Dropdown';
 import Offer from '../components/Offer';
 
+
 export default function Home({ offer, navigation, AppState }) {
   const { allOffers, setOffer, setAllOffers } = AppState;
+
+
 
   useIsFocused();
   const [selectedOffer, setSelectedOffer] = useState(null);
@@ -20,7 +23,6 @@ export default function Home({ offer, navigation, AppState }) {
   const [categoryId, setCategoryId] = useState(0);
   const subjects = ['Subject', 'Math', 'Science', 'English'];
   const sorting = ['Sorting', 'Newest', 'Oldest', 'A-Z', 'Z-A'];
-  console.log('home');
   return (
     <View style={styles.screen}>
       <GlobalHeader navigation={navigation} />

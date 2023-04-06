@@ -1,5 +1,6 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
 import React from 'react';
+import useFetch from '../Fetch';
 
 export const MediumButton = ({ text, medBfunc }) => {
   return (
